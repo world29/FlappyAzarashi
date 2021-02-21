@@ -10,11 +10,11 @@ public class BulletController : MonoBehaviour
     private void Update()
     {
         // 移動
-        var newPosition = transform.position;
+        var localMove = (m_speed * Time.deltaTime) * Vector3.right;
 
-        newPosition.x += m_speed * Time.deltaTime;
+        var globalMove = transform.rotation * localMove;
 
-        transform.position = newPosition;
+        transform.Translate(globalMove);
 
         // 寿命
         m_lifetime -= Time.deltaTime;
