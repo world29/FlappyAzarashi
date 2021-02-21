@@ -31,6 +31,6 @@ public class BulletController : MonoBehaviour
             return;
         }
 
-        Debug.Log("HIT");
+        Destroy(gameObject);
     }
 }
