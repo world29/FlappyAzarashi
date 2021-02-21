@@ -14,6 +14,8 @@ public class AzarashiController : MonoBehaviour
     public float relativeVelocityX;
     public GameObject sprite;
 
+    public BulletController bullet;
+
     public bool IsDead()
     {
         return isDead;
@@ -39,6 +41,11 @@ public class AzarashiController : MonoBehaviour
             Flap();
         }
 
+        if (Input.GetButtonDown("Fire2"))
+        {
+            Shot();
+        }
+
         ApplyAngle();
 
         animator.SetBool("flap", angle >= 0.0f && !isDead);
@@ -51,6 +58,16 @@ public class AzarashiController : MonoBehaviour
         if (rb2d.isKinematic) return;
 
         rb2d.velocity = new Vector2(0.0f, flapVelocity);
+    }
+
+    public void Shot()
+    {
+        if (isDead) return;
+
+        if (rb2d.isKinematic) return;
+
+        var clone = GameObject.Instantiate<BulletController>(bullet);
+        clone.transform.position = transform.position;
     }
 
     void ApplyAngle()
