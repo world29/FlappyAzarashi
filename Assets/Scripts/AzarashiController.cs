@@ -4,6 +4,12 @@ using UnityEngine;
 
 public class AzarashiController : MonoBehaviour
 {
+    public enum ShotType
+    {
+        Normal,
+        ThreeWay,
+    };
+
     Rigidbody2D rb2d;
     Animator animator;
     float angle;
@@ -13,6 +19,9 @@ public class AzarashiController : MonoBehaviour
     public float flapVelocity;
     public float relativeVelocityX;
     public GameObject sprite;
+    public ShotType m_shotType;
+
+    public BulletController bullet;
 
     public bool IsDead()
     {
@@ -25,18 +34,20 @@ public class AzarashiController : MonoBehaviour
         animator = sprite.GetComponent<Animator>();
     }
 
-    // Start is called before the first frame update
     void Start()
     {
-        
     }
 
-    // Update is called once per frame
     void Update()
     {
         if (Input.GetButtonDown("Fire1") && transform.position.y < maxHeight)
         {
             Flap();
+        }
+
+        if (Input.GetButtonDown("Fire2"))
+        {
+            Shot();
         }
 
         ApplyAngle();
@@ -51,6 +62,27 @@ public class AzarashiController : MonoBehaviour
         if (rb2d.isKinematic) return;
 
         rb2d.velocity = new Vector2(0.0f, flapVelocity);
+    }
+
+    public void Shot()
+    {
+        if (isDead) return;
+
+        if (rb2d.isKinematic) return;
+
+        var clone = GameObject.Instantiate<BulletController>(bullet);
+        clone.transform.position = transform.position;
+
+        if (m_shotType == ShotType.ThreeWay)
+        {
+            Quaternion angle;
+
+            angle = Quaternion.AngleAxis(10, Vector3.forward);
+            GameObject.Instantiate<BulletController>(bullet, transform.position, angle);
+
+            angle = Quaternion.AngleAxis(-10, Vector3.forward);
+            GameObject.Instantiate<BulletController>(bullet, transform.position, angle);
+        }
     }
 
     void ApplyAngle()
@@ -75,6 +107,11 @@ public class AzarashiController : MonoBehaviour
     {
         if (isDead) return;
 
+        if (collision.gameObject.CompareTag("Item"))
+        {
+            return;
+        }
+
         Camera.main.SendMessage("Clash");
 
         isDead = true;
@@ -83,5 +120,10 @@ public class AzarashiController : MonoBehaviour
     public void SetSteerActive(bool active)
     {
         rb2d.isKinematic = !active;
+    }
+
+    public void PowerUpShotThreeWay()
+    {
+        m_shotType = ShotType.ThreeWay;
     }
 }

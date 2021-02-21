@@ -117,7 +117,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 3
   startPosition: 8
-  endPosition: -8
+  endPosition: -24
 --- !u!114 &8469360565102901279
 MonoBehaviour:
   m_ObjectHideFlags: 0
