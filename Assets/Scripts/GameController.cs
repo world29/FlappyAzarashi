@@ -21,6 +21,15 @@ public class GameController : MonoBehaviour
     public Text scoreText;
     public Text stateText;
 
+    public AudioClip m_gameOverBGM;
+
+    private AudioSource m_audioSource;
+
+    private void Awake()
+    {
+        m_audioSource = GetComponent<AudioSource>();
+    }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -79,6 +88,10 @@ public class GameController : MonoBehaviour
 
         stateText.gameObject.SetActive(true);
         stateText.text = "GameOver";
+
+        m_audioSource.clip = m_gameOverBGM;
+        m_audioSource.loop = false;
+        m_audioSource.Play();
     }
 
     void Reload()
