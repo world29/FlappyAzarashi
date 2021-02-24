@@ -20,6 +20,7 @@ public class GameController : MonoBehaviour
     public GameObject blocks;
     public Text scoreText;
     public Text stateText;
+    public GameInput gameInput;
 
     public AudioClip m_gameOverBGM;
 
@@ -30,7 +31,6 @@ public class GameController : MonoBehaviour
         m_audioSource = GetComponent<AudioSource>();
     }
 
-    // Start is called before the first frame update
     void Start()
     {
         Ready();
@@ -41,13 +41,13 @@ public class GameController : MonoBehaviour
         switch (state)
         {
             case State.Ready:
-                if (Input.GetButtonDown("Fire1")) GameStart();
+                if (gameInput.GetButtonDown(GameInput.ButtonType.Main)) GameStart();
                 break;
             case State.Play:
                 if (azarashi.IsDead()) GameOver();
                 break;
             case State.GameOver:
-                if (Input.GetButtonDown("Fire1")) Reload();
+                if (gameInput.GetButtonDown(GameInput.ButtonType.Main)) Reload();
                 break;
         }
     }

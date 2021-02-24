@@ -15,6 +15,7 @@ public class AzarashiController : MonoBehaviour
     float angle;
     bool isDead;
 
+    public GameInput gameInput;
     public float maxHeight;
     public float flapVelocity;
     public float relativeVelocityX;
@@ -40,12 +41,12 @@ public class AzarashiController : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetButtonDown("Fire1") && transform.position.y < maxHeight)
+        if (gameInput.GetButtonDown(GameInput.ButtonType.Main) && transform.position.y < maxHeight)
         {
             Flap();
         }
 
-        if (Input.GetButtonDown("Fire2"))
+        if (gameInput.GetButtonDown(GameInput.ButtonType.Sub))
         {
             Shot();
         }
