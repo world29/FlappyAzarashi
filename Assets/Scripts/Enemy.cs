@@ -18,8 +18,6 @@ public class Enemy : MonoBehaviour
             return;
         }
 
-        gameController.SendMessage("IncreaseScore");
-
         gameObject.SetActive(false);
     }
 }
