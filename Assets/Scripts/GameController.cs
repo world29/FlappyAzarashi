@@ -22,7 +22,6 @@ public class GameController : MonoBehaviour
     public Text scoreText;
     public Text stateText;
     public GameInput gameInput;
-    public int scoreForGameClear = 30;
 
     public AudioClip m_gameOverBGM;
 
@@ -47,7 +46,6 @@ public class GameController : MonoBehaviour
                 break;
             case State.Play:
                 if (azarashi.IsDead()) GameOver();
-                else if (score >= scoreForGameClear) GameClear();
                 break;
             case State.GameOver:
                 if (gameInput.GetButtonDown(GameInput.ButtonType.Main)) Reload();
@@ -100,7 +98,13 @@ public class GameController : MonoBehaviour
         m_audioSource.Play();
     }
 
-    void GameClear()
+    void Reload()
+    {
+        string currentSceneName = SceneManager.GetActiveScene().name;
+        SceneManager.LoadScene(currentSceneName);
+    }
+
+    public void GameClear()
     {
         state = State.GameClear;
 
@@ -108,13 +112,7 @@ public class GameController : MonoBehaviour
         blocks.SetActive(false);
 
         stateText.gameObject.SetActive(true);
-        stateText.text = "Clear";
-    }
-
-    void Reload()
-    {
-        string currentSceneName = SceneManager.GetActiveScene().name;
-        SceneManager.LoadScene(currentSceneName);
+        stateText.text = "Stage Clear";
     }
 
     public void IncreaseScore()
