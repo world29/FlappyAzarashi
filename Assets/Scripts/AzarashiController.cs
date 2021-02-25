@@ -76,13 +76,16 @@ public class AzarashiController : MonoBehaviour
 
         if (m_shotType == ShotType.ThreeWay)
         {
-            Quaternion angle;
-
-            angle = Quaternion.AngleAxis(10, Vector3.forward);
-            GameObject.Instantiate<BulletController>(bullet, transform.position, angle);
-
-            angle = Quaternion.AngleAxis(-10, Vector3.forward);
-            GameObject.Instantiate<BulletController>(bullet, transform.position, angle);
+            {
+                var dir = Quaternion.AngleAxis(10, Vector3.forward) * Vector3.right;
+                var cloned = GameObject.Instantiate<BulletController>(bullet, transform.position, Quaternion.identity);
+                cloned.Direction = dir;
+            }
+            {
+                var dir = Quaternion.AngleAxis(-10, Vector3.forward) * Vector3.right;
+                var cloned = GameObject.Instantiate<BulletController>(bullet, transform.position, Quaternion.identity);
+                cloned.Direction = dir;
+            }
         }
     }
 
