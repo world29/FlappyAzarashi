@@ -11,6 +11,7 @@ public class GameController : MonoBehaviour
         Ready,
         Play,
         GameOver,
+        GameClear,
     }
 
     State state;
@@ -21,6 +22,7 @@ public class GameController : MonoBehaviour
     public Text scoreText;
     public Text stateText;
     public GameInput gameInput;
+    public int scoreForGameClear = 30;
 
     public AudioClip m_gameOverBGM;
 
@@ -45,8 +47,12 @@ public class GameController : MonoBehaviour
                 break;
             case State.Play:
                 if (azarashi.IsDead()) GameOver();
+                else if (score >= scoreForGameClear) GameClear();
                 break;
             case State.GameOver:
+                if (gameInput.GetButtonDown(GameInput.ButtonType.Main)) Reload();
+                break;
+            case State.GameClear:
                 if (gameInput.GetButtonDown(GameInput.ButtonType.Main)) Reload();
                 break;
         }
@@ -92,6 +98,17 @@ public class GameController : MonoBehaviour
         m_audioSource.clip = m_gameOverBGM;
         m_audioSource.loop = false;
         m_audioSource.Play();
+    }
+
+    void GameClear()
+    {
+        state = State.GameClear;
+
+        azarashi.SetSteerActive(false);
+        blocks.SetActive(false);
+
+        stateText.gameObject.SetActive(true);
+        stateText.text = "Clear";
     }
 
     void Reload()

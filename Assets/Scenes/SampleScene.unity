@@ -2141,6 +2141,7 @@ MonoBehaviour:
   scoreText: {fileID: 1379738093}
   stateText: {fileID: 1647284099}
   gameInput: {fileID: 1194756035}
+  scoreForGameClear: 30
   m_gameOverBGM: {fileID: 8300000, guid: f4f7dcb8c803648b3b2a8b34d565ab56, type: 3}
 --- !u!4 &1634945652
 Transform:
