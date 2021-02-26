@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class AzarashiController : MonoBehaviour
 {
@@ -14,6 +15,7 @@ public class AzarashiController : MonoBehaviour
     Animator animator;
     float angle;
     bool isDead;
+    int m_bulletCount;
 
     public GameInput gameInput;
     public float maxHeight;
@@ -21,8 +23,26 @@ public class AzarashiController : MonoBehaviour
     public float relativeVelocityX;
     public GameObject sprite;
     public ShotType m_shotType;
+    public int m_initialBulletCount = 3;
+    public Text m_shotButtonText;
 
     public BulletController bullet;
+
+    int BulletCount
+    {
+        get { return m_bulletCount; }
+        set
+        {
+            m_bulletCount = value;
+            UpdateShotButtonText(m_shotType, value);
+        }
+    }
+
+    void UpdateShotButtonText(ShotType shotType, int bulletCount)
+    {
+        string label = shotType == ShotType.Normal ? "NORMAL" : "3-Way";
+        m_shotButtonText.text = label + "\n" + bulletCount;
+    }
 
     public bool IsDead()
     {
@@ -33,6 +53,8 @@ public class AzarashiController : MonoBehaviour
     {
         rb2d = GetComponent<Rigidbody2D>();
         animator = sprite.GetComponent<Animator>();
+
+        BulletCount = m_initialBulletCount;
     }
 
     void Start()
@@ -71,11 +93,18 @@ public class AzarashiController : MonoBehaviour
 
         if (rb2d.isKinematic) return;
 
-        var clone = GameObject.Instantiate<BulletController>(bullet);
-        clone.transform.position = transform.position;
+        if (m_bulletCount == 0) return;
 
-        if (m_shotType == ShotType.ThreeWay)
+        if (m_shotType == ShotType.Normal)
         {
+            var clone = GameObject.Instantiate<BulletController>(bullet);
+            clone.transform.position = transform.position;
+        }
+        else if (m_shotType == ShotType.ThreeWay)
+        {
+            var clone = GameObject.Instantiate<BulletController>(bullet);
+            clone.transform.position = transform.position;
+
             {
                 var dir = Quaternion.AngleAxis(10, Vector3.forward) * Vector3.right;
                 var cloned = GameObject.Instantiate<BulletController>(bullet, transform.position, Quaternion.identity);
@@ -87,6 +116,10 @@ public class AzarashiController : MonoBehaviour
                 cloned.Direction = dir;
             }
         }
+
+        int consumed = m_shotType == ShotType.ThreeWay ? 3 : 1;
+
+        BulletCount = Mathf.Max(0, m_bulletCount - consumed);
     }
 
     void ApplyAngle()
@@ -126,8 +159,22 @@ public class AzarashiController : MonoBehaviour
         rb2d.isKinematic = !active;
     }
 
-    public void PowerUpShotThreeWay()
+    public void ToggleShotType()
     {
-        m_shotType = ShotType.ThreeWay;
+        if (m_shotType == ShotType.Normal)
+        {
+            m_shotType = ShotType.ThreeWay;
+        }
+        else
+        {
+            m_shotType = ShotType.Normal;
+        }
+
+        UpdateShotButtonText(m_shotType, m_bulletCount);
+    }
+
+    public void SupplyBullet()
+    {
+        BulletCount += 6;
     }
 }
