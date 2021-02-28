@@ -17,7 +17,7 @@ public class GameController : MonoBehaviour
     State state;
     int score;
 
-    public AzarashiController azarashi;
+    public PlayerController azarashi;
     public GameObject blocks;
     public Text scoreText;
     public Text stateText;

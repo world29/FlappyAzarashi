@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class AzarashiController : MonoBehaviour
+public class PlayerController : MonoBehaviour
 {
     public enum ShotType
     {

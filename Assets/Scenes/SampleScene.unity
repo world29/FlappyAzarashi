@@ -3227,7 +3227,7 @@ PrefabInstance:
     - target: {fileID: 348412818859047502, guid: 03100ff39ebb1d44e990af408abd5e25,
         type: 3}
       propertyPath: m_Name
-      value: Azarashi
+      value: Hannya
       objectReference: {fileID: 0}
     - target: {fileID: 348412818859047502, guid: 03100ff39ebb1d44e990af408abd5e25,
         type: 3}
