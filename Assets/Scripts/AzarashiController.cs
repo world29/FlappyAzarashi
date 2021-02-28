@@ -12,7 +12,6 @@ public class AzarashiController : MonoBehaviour
     };
 
     Rigidbody2D rb2d;
-    Animator animator;
     float angle;
     bool isDead;
     int m_bulletCount;
@@ -52,7 +51,6 @@ public class AzarashiController : MonoBehaviour
     private void Awake()
     {
         rb2d = GetComponent<Rigidbody2D>();
-        animator = sprite.GetComponent<Animator>();
 
         BulletCount = m_initialBulletCount;
     }
@@ -74,8 +72,6 @@ public class AzarashiController : MonoBehaviour
         }
 
         ApplyAngle();
-
-        animator.SetBool("flap", angle >= 0.0f && !isDead);
     }
 
     public void Flap()
