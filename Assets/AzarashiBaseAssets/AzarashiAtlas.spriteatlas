@@ -53,6 +53,7 @@ SpriteAtlas:
   - {fileID: 21300000, guid: fb4c7275b71d9c7409c599bb9e80e632, type: 3}
   - {fileID: 21300000, guid: b890cf264c968475a80d0170d10fd400, type: 3}
   - {fileID: 21300000, guid: 6ff0005955a0a4dd0ace9672b3d8812d, type: 3}
+  - {fileID: 21300000, guid: 43a3cd3a8465f4134b499fbba7854d71, type: 3}
   - {fileID: 21300000, guid: a980e84ebdcc04e4db4a8697fe6167f3, type: 3}
   - {fileID: 21300000, guid: fa7be84f7f483dd46ab3ad2a373b0db7, type: 3}
   m_PackedSpriteNamesToIndex:
@@ -63,6 +64,7 @@ SpriteAtlas:
   - Chara02
   - hannya
   - Block
+  - otafuku
   - Mountain
   - Chara01
   m_Tag: AzarashiAtlas
