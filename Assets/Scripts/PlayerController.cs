@@ -15,6 +15,7 @@ public class PlayerController : MonoBehaviour
     float angle;
     bool isDead;
     int m_bulletCount;
+    SpriteTrailRenderer m_trailRenderer;
 
     public GameInput gameInput;
     public float maxHeight;
@@ -51,6 +52,7 @@ public class PlayerController : MonoBehaviour
     private void Awake()
     {
         rb2d = GetComponent<Rigidbody2D>();
+        m_trailRenderer = GetComponent<SpriteTrailRenderer>();
 
         BulletCount = m_initialBulletCount;
     }
@@ -68,7 +70,7 @@ public class PlayerController : MonoBehaviour
 
         if (gameInput.GetButtonDown(GameInput.ButtonType.Sub))
         {
-            Shot();
+            m_trailRenderer.SetEnabled(true);
         }
 
         ApplyAngle();
