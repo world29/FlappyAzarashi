@@ -5,44 +5,19 @@ using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
 {
-    public enum ShotType
-    {
-        Normal,
-        ThreeWay,
-    };
-
     Rigidbody2D rb2d;
     float angle;
     bool isDead;
-    int m_bulletCount;
     SpriteTrailRenderer m_trailRenderer;
+    AudioSource m_audioSource;
 
     public GameInput gameInput;
     public float maxHeight;
     public float flapVelocity;
+    public Vector2 dashVelocity;
     public float relativeVelocityX;
     public GameObject sprite;
-    public ShotType m_shotType;
-    public int m_initialBulletCount = 3;
-    public Text m_shotButtonText;
-
-    public BulletController bullet;
-
-    int BulletCount
-    {
-        get { return m_bulletCount; }
-        set
-        {
-            m_bulletCount = value;
-            UpdateShotButtonText(m_shotType, value);
-        }
-    }
-
-    void UpdateShotButtonText(ShotType shotType, int bulletCount)
-    {
-        string label = shotType == ShotType.Normal ? "NORMAL" : "3-Way";
-        m_shotButtonText.text = label + "\n" + bulletCount;
-    }
+    public AudioClip m_dashSound;
 
     public bool IsDead()
     {
@@ -53,8 +28,7 @@ public class PlayerController : MonoBehaviour
     {
         rb2d = GetComponent<Rigidbody2D>();
         m_trailRenderer = GetComponent<SpriteTrailRenderer>();
-
-        BulletCount = m_initialBulletCount;
+        m_audioSource = GetComponent<AudioSource>();
     }
 
     void Start()
@@ -70,7 +44,7 @@ public class PlayerController : MonoBehaviour
 
         if (gameInput.GetButtonDown(GameInput.ButtonType.Sub))
         {
-            m_trailRenderer.SetEnabled(true);
+            Dash();
         }
 
         ApplyAngle();
@@ -82,42 +56,50 @@ public class PlayerController : MonoBehaviour
 
         if (rb2d.isKinematic) return;
 
-        rb2d.velocity = new Vector2(0.0f, flapVelocity);
+        rb2d.velocity = new Vector2(rb2d.velocity.x, flapVelocity);
     }
 
-    public void Shot()
+    public void Dash()
     {
         if (isDead) return;
 
         if (rb2d.isKinematic) return;
 
-        if (m_bulletCount == 0) return;
+        StartCoroutine(DashCoroutine());
+    }
 
-        if (m_shotType == ShotType.Normal)
+    IEnumerator DashCoroutine()
+    {
+        //
+        rb2d.velocity = dashVelocity;
+
+        m_trailRenderer.SetEnabled(true);
+
+        m_audioSource.PlayOneShot(m_dashSound);
+
+        // 一定時間後、画面スクロールがプレイヤーに追いつくようにする
+        yield return new WaitForSeconds(0.5f); // SpriteTrailRenderer の残像持続時間と合わせる
+
+        m_trailRenderer.SetEnabled(false);
+
+        Dictionary<ScrollObject, float> scrollObjects = new Dictionary<ScrollObject, float>();
+
+        ScrollObject[] objects = FindObjectsOfType<ScrollObject>();
+        foreach(var obj in objects)
         {
-            var clone = GameObject.Instantiate<BulletController>(bullet);
-            clone.transform.position = transform.position;
-        }
-        else if (m_shotType == ShotType.ThreeWay)
-        {
-            var clone = GameObject.Instantiate<BulletController>(bullet);
-            clone.transform.position = transform.position;
-
-            {
-                var dir = Quaternion.AngleAxis(10, Vector3.forward) * Vector3.right;
-                var cloned = GameObject.Instantiate<BulletController>(bullet, transform.position, Quaternion.identity);
-                cloned.Direction = dir;
-            }
-            {
-                var dir = Quaternion.AngleAxis(-10, Vector3.forward) * Vector3.right;
-                var cloned = GameObject.Instantiate<BulletController>(bullet, transform.position, Quaternion.identity);
-                cloned.Direction = dir;
-            }
+            scrollObjects.Add(obj, obj.speed);
         }
 
-        int consumed = m_shotType == ShotType.ThreeWay ? 3 : 1;
+        foreach (var so in scrollObjects) so.Key.speed *= 3;
 
-        BulletCount = Mathf.Max(0, m_bulletCount - consumed);
+        rb2d.velocity = new Vector2(-3.5f, rb2d.velocity.y);
+
+        yield return new WaitForSeconds(1.0f);
+
+        // 速度を戻す
+        foreach (var so in scrollObjects) so.Key.speed = so.Value;
+
+        rb2d.velocity = new Vector2(0, rb2d.velocity.y);
     }
 
     void ApplyAngle()
@@ -155,24 +137,5 @@ public class PlayerController : MonoBehaviour
     public void SetSteerActive(bool active)
     {
         rb2d.isKinematic = !active;
-    }
-
-    public void ToggleShotType()
-    {
-        if (m_shotType == ShotType.Normal)
-        {
-            m_shotType = ShotType.ThreeWay;
-        }
-        else
-        {
-            m_shotType = ShotType.Normal;
-        }
-
-        UpdateShotButtonText(m_shotType, m_bulletCount);
-    }
-
-    public void SupplyBullet()
-    {
-        BulletCount += 6;
     }
 }

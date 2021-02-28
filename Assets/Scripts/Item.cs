@@ -21,16 +21,6 @@ public class Item : MonoBehaviour
 
         var playerObject = collision.gameObject;
 
-        switch (m_itemType)
-        {
-            case ItemType.ShotTypeChange:
-                playerObject.SendMessage("ToggleShotType");
-                break;
-            case ItemType.BulletSupply:
-                playerObject.SendMessage("SupplyBullet");
-                break;
-        }
-
         gameObject.SetActive(false);
     }
 }
