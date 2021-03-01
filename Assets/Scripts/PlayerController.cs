@@ -14,7 +14,7 @@ public class PlayerController : MonoBehaviour
     public GameInput gameInput;
     public float maxHeight;
     public float flapVelocity;
-    public Vector2 dashVelocity;
+    public float dashVelocity;
     public float relativeVelocityX;
     public GameObject sprite;
     public AudioClip m_dashSound;
@@ -71,35 +71,30 @@ public class PlayerController : MonoBehaviour
     IEnumerator DashCoroutine()
     {
         //
-        rb2d.velocity = dashVelocity;
+        rb2d.velocity = new Vector2(rb2d.velocity.x, dashVelocity);
 
         m_trailRenderer.SetEnabled(true);
 
         m_audioSource.PlayOneShot(m_dashSound);
 
-        // 一定時間後、画面スクロールがプレイヤーに追いつくようにする
-        yield return new WaitForSeconds(0.5f); // SpriteTrailRenderer の残像持続時間と合わせる
-
-        m_trailRenderer.SetEnabled(false);
-
         Dictionary<ScrollObject, float> scrollObjects = new Dictionary<ScrollObject, float>();
 
         ScrollObject[] objects = FindObjectsOfType<ScrollObject>();
-        foreach(var obj in objects)
+        foreach (var obj in objects)
         {
             scrollObjects.Add(obj, obj.speed);
         }
 
         foreach (var so in scrollObjects) so.Key.speed *= 3;
 
-        rb2d.velocity = new Vector2(-3.5f, rb2d.velocity.y);
-
-        yield return new WaitForSeconds(1.0f);
+        yield return new WaitForSeconds(0.5f); // SpriteTrailRenderer の残像持続時間と合わせる
 
         // 速度を戻す
         foreach (var so in scrollObjects) so.Key.speed = so.Value;
 
-        rb2d.velocity = new Vector2(0, rb2d.velocity.y);
+        yield return new WaitForSeconds(0.2f);
+
+        m_trailRenderer.SetEnabled(false);
     }
 
     void ApplyAngle()

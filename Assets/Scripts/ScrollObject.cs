@@ -22,8 +22,6 @@ public class ScrollObject : MonoBehaviour
         if (transform.position.x <= endPosition) ScrollEnd();
     }
 
-
-
     void ScrollEnd()
     {
         float diff = transform.position.x - endPosition;

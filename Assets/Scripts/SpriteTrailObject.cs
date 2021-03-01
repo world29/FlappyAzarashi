@@ -8,6 +8,9 @@ public class SpriteTrailObject : MonoBehaviour
     public Color m_StartColor;
     public Color m_EndColor;
 
+    public bool m_ScrollTrail;
+    public float m_ScrollSpeed = 1.0f;
+
     private bool m_InUse;
     private Vector2 m_Position;
     private Quaternion m_Rotation;
@@ -26,6 +29,17 @@ public class SpriteTrailObject : MonoBehaviour
         {
             transform.position = m_Position;
             transform.rotation = m_Rotation;
+
+            if (m_ScrollTrail)
+            {
+                float offsetX = -1 * m_ScrollSpeed * m_TimeDisplayed;
+
+                var scrolledPosition = transform.position;
+                scrolledPosition.x += offsetX;
+
+                transform.position = scrolledPosition;
+                //transform.Translate(offsetX, 0, 0);
+            }
 
             m_TimeDisplayed += Time.deltaTime;
 

@@ -97,3 +97,5 @@ MonoBehaviour:
   m_Renderer: {fileID: 8657672156366456112}
   m_StartColor: {r: 0.06132126, g: 0, b: 1, a: 1}
   m_EndColor: {r: 0.0627451, g: 0, b: 1, a: 0.14901961}
+  m_ScrollTrail: 1
+  m_ScrollSpeed: 7

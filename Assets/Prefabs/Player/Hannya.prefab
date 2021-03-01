@@ -88,7 +88,7 @@ MonoBehaviour:
   gameInput: {fileID: 0}
   maxHeight: 12
   flapVelocity: 7
-  dashVelocity: {x: 7, y: 7}
+  dashVelocity: 7
   relativeVelocityX: 10
   sprite: {fileID: 492067596778591045}
   m_dashSound: {fileID: 8300000, guid: 69d6833d9d32b2d40ba972e697af118c, type: 3}
@@ -105,7 +105,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_LeadingSprite: {fileID: 8353916026117952764}
-  m_TrailSegments: 4
+  m_TrailSegments: 5
   m_TrailTime: 0.5
   m_TrailObject: {fileID: 3768618722709033931, guid: 529d2f2187e5506499c9d06c4b601007,
     type: 3}
