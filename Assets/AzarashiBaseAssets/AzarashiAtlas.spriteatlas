@@ -46,26 +46,42 @@ SpriteAtlas:
     bindAsDefault: 1
   m_MasterAtlas: {fileID: 0}
   m_PackedSprites:
+  - {fileID: 21300000, guid: 7c877f0137a3b2d4a82577ed1c452059, type: 3}
   - {fileID: 21300000, guid: 727f412306dc24a82a733861c0cf606c, type: 3}
   - {fileID: 21300000, guid: f229e5241b1e18849a2d5803f1c8a93a, type: 3}
+  - {fileID: 21300000, guid: dbfc96a4d762a3b4eb566fa9235735d1, type: 3}
   - {fileID: 21300000, guid: 856540153d78405449afef12d1ed5b60, type: 3}
   - {fileID: 21300000, guid: 2c59b5158725c4db4892e34a85d8bf14, type: 3}
   - {fileID: 21300000, guid: fb4c7275b71d9c7409c599bb9e80e632, type: 3}
   - {fileID: 21300000, guid: b890cf264c968475a80d0170d10fd400, type: 3}
+  - {fileID: 21300000, guid: e83ab76626a93184b984761ef72bafc9, type: 3}
+  - {fileID: 21300000, guid: b11759f634f99bb4da2a654fb260d75e, type: 3}
+  - {fileID: 21300000, guid: 163a862773fedcc488c7f2544b5d2ec9, type: 3}
   - {fileID: 21300000, guid: 6ff0005955a0a4dd0ace9672b3d8812d, type: 3}
   - {fileID: 21300000, guid: 43a3cd3a8465f4134b499fbba7854d71, type: 3}
+  - {fileID: 21300000, guid: c3cc595c458911d45a994ef3ac1a70b8, type: 3}
   - {fileID: 21300000, guid: a980e84ebdcc04e4db4a8697fe6167f3, type: 3}
+  - {fileID: 21300000, guid: e07eb4eeded16524d92851a394b0ab1e, type: 3}
   - {fileID: 21300000, guid: fa7be84f7f483dd46ab3ad2a373b0db7, type: 3}
+  - {fileID: 21300000, guid: 1b68f0bf5554043478b7b41e57bc1f16, type: 3}
   m_PackedSpriteNamesToIndex:
+  - banana_idle_0002
   - Cloud
   - Chara03
+  - banana_idle_0006
   - Sky
   - Ground
   - Chara02
   - hannya
+  - banana_idle_0003
+  - banana_idle_0005
+  - banana_idle_0007
   - Block
   - otafuku
+  - banana_idle_0004
   - Mountain
+  - banana_idle_0000
   - Chara01
+  - banana_idle_0001
   m_Tag: AzarashiAtlas
   m_IsVariant: 0
