@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 6608966066466292762}
   - component: {fileID: 3007990719846435065}
   m_Layer: 8
-  m_Name: eagle
+  m_Name: Hyottoco
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -73,9 +73,9 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: a7462e909f850cf478df6b49d9a2699a, type: 3}
+  m_Sprite: {fileID: 21300000, guid: eef38eea6eea1490a90d36b5c61a5c4a, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_FlipX: 0
+  m_FlipX: 1
   m_FlipY: 0
   m_DrawMode: 0
   m_Size: {x: 0.35, y: 0.2}
@@ -101,7 +101,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1.75, y: 1.40625}
+    oldSize: {x: 1.41, y: 1.76}
     newSize: {x: 0.35, y: 0.2}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
