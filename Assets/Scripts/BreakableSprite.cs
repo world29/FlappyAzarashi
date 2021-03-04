@@ -20,6 +20,9 @@ public class BreakableSprite : MonoBehaviour
         // 事前に破壊されたスプライトを生成し、親子付けしておく
         m_spriteRenderer = GetComponent<SpriteRenderer>();
 
+        // フリップは非対応
+        Debug.Assert(m_spriteRenderer.flipX == false && m_spriteRenderer.flipY == false);
+
         // ボロノイ領域の生成
         var voronoi = ComputeRandomVoronoi(m_polygonCount, m_spriteRenderer.sprite.rect);
 
@@ -32,18 +35,20 @@ public class BreakableSprite : MonoBehaviour
 
             // 子オブジェクトとして生成
             var go = new GameObject("piece");
-            go.transform.position = transform.position;
-            go.transform.parent = transform;
 
             // コンポーネントの設定
             var sr = go.AddComponent<SpriteRenderer>();
             sr.sprite = sprite;
-            sr.flipX = m_spriteRenderer.flipX;
-            // ピボット位置を原点として配置されているため、補正する
-            //go.transform.position += new Vector3(sprite.pivot.x / sprite.pixelsPerUnit, sprite.pivot.y / sprite.pixelsPerUnit);
+
+            // ピボット位置を原点として配置されるため、補正する
+            float offsetX = sprite.pivot.x / sprite.pixelsPerUnit - sprite.bounds.extents.x;
+            float offsetY = sprite.pivot.y / sprite.pixelsPerUnit - sprite.bounds.extents.y;
+            go.transform.position = transform.position + new Vector3(offsetX, offsetY);
+            go.transform.parent = transform;
 
             go.AddComponent<PolygonCollider2D>(); // Sprite の物理形状を元にコライダを生成する
             var rb = go.AddComponent<Rigidbody2D>();
+            rb.useAutoMass = true;
 
             go.SetActive(false);
 
@@ -136,13 +141,12 @@ public class BreakableSprite : MonoBehaviour
         foreach (var go in m_pieces)
         {
             go.transform.parent = null;
-            go.SetActive(true);
         }
-
-        yield return new WaitForSecondsRealtime(0.2f);
 
         foreach (var go in m_pieces)
         {
+            go.SetActive(true);
+
             Vector2 forceDirection = (Vector2)go.transform.position - contactPoint;
             Vector2 force = forceDirection.normalized * m_collisionImpulseScale;
 
@@ -153,6 +157,8 @@ public class BreakableSprite : MonoBehaviour
                 rb.AddForce(force, ForceMode2D.Impulse);
             }
         }
+
+        yield return null;
     }
 
     public void BreakSprite(Vector2 contactPoint)
@@ -160,4 +166,15 @@ public class BreakableSprite : MonoBehaviour
         // 破片オブジェクトを吹き飛ばす
         StartCoroutine(BreakSpriteCoroutine(contactPoint));
     }
+
+#if DEBUG
+    [ContextMenu("BreakSprite")]
+    public void BreakSpriteRandomPoint()
+    {
+        var min = m_spriteRenderer.sprite.bounds.min;
+        var max = m_spriteRenderer.sprite.bounds.max;
+
+        BreakSprite(new Vector2(Random.Range(min.x, max.x), Random.Range(min.y, max.y)));
+    }
+#endif
 }
