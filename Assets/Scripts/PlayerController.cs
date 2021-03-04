@@ -22,7 +22,7 @@ public class PlayerController : MonoBehaviour
 
     public GameObject dashAttackCollision;
     public GameObject damageCollision;
-    public float m_hitStopDuration = 0.1f;
+    public float m_hitStopTime = 0.1f;
 
     public GameObject sprite;
     public AudioClip m_dashSound;
@@ -89,9 +89,14 @@ public class PlayerController : MonoBehaviour
 
     IEnumerator HitStopCoroutine()
     {
+        if (m_hitStopTime == 0)
+        {
+            yield break;
+        }
+
         Time.timeScale = 0;
 
-        yield return new WaitForSecondsRealtime(m_hitStopDuration);
+        yield return new WaitForSecondsRealtime(m_hitStopTime);
 
         Time.timeScale = 1;
     }
