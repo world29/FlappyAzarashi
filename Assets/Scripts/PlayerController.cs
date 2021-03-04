@@ -22,11 +22,11 @@ public class PlayerController : MonoBehaviour
 
     public GameObject dashAttackCollision;
     public GameObject damageCollision;
-    public float hitStopDuration = 0.2f;
-    public AnimationCurve hitStopTimeScaling;
+    public float m_hitStopDuration = 0.1f;
 
     public GameObject sprite;
     public AudioClip m_dashSound;
+    public AudioClip m_dashHitSound;
 
     public bool IsDead()
     {
@@ -89,16 +89,9 @@ public class PlayerController : MonoBehaviour
 
     IEnumerator HitStopCoroutine()
     {
-        float t = 0;
+        Time.timeScale = 0;
 
-        while (t < hitStopDuration)
-        {
-            Time.timeScale = Mathf.Clamp01(hitStopTimeScaling.Evaluate(t / hitStopDuration));
-
-            t += Time.unscaledDeltaTime;
-
-            yield return new WaitForEndOfFrame();
-        }
+        yield return new WaitForSecondsRealtime(m_hitStopDuration);
 
         Time.timeScale = 1;
     }
@@ -158,8 +151,12 @@ public class PlayerController : MonoBehaviour
             return;
         }
 
+        // ダッシュをキャンセルする
         StopCoroutine(m_runningDashCoroutin);
         OnEndDash();
+
+        // ヒット時の演出
+        m_audioSource.PlayOneShot(m_dashHitSound);
 
         StartCoroutine(HitStopCoroutine());
 
