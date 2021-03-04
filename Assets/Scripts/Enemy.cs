@@ -15,6 +15,11 @@ public class Enemy : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
+            var contact = collision.contacts[0];
+            gameObject.SendMessage("BreakSprite", contact.point, SendMessageOptions.DontRequireReceiver);
+
+            gameObject.SetActive(false);
+
             return;
         }
 

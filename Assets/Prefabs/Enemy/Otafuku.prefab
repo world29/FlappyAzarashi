@@ -10,11 +10,12 @@ GameObject:
   m_Component:
   - component: {fileID: 3731231860899529060}
   - component: {fileID: 3731231860899529061}
-  - component: {fileID: 3731231860899529062}
+  - component: {fileID: 5161322690887029893}
   - component: {fileID: 3731231860899529067}
   - component: {fileID: 9195478231199800751}
+  - component: {fileID: 6569884253624218143}
   m_Layer: 8
-  m_Name: bat
+  m_Name: Otafuku
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -84,8 +85,8 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!61 &3731231860899529062
-BoxCollider2D:
+--- !u!58 &5161322690887029893
+CircleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -97,19 +98,9 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.110856056, y: -0.0138578415}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1.41, y: 1.76}
-    newSize: {x: 0.35, y: 0.2}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
+  m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Size: {x: 0.8166084, y: 0.6527138}
-  m_EdgeRadius: 0
+  m_Radius: 0.52
 --- !u!50 &3731231860899529067
 Rigidbody2D:
   serializedVersion: 4
@@ -125,7 +116,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 1
+  m_GravityScale: 0
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
@@ -143,3 +134,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b4962b7cae6342942ba7dab07f145380, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &6569884253624218143
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3731231860899529056}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1feded38c39656d4fa0a62fa9d0493a6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_collisionImpulseScale: 2
+  m_polygonCount: 16

@@ -11,11 +11,20 @@ public class PlayerController : MonoBehaviour
     SpriteTrailRenderer m_trailRenderer;
     AudioSource m_audioSource;
 
+    Coroutine m_runningDashCoroutin;
+    Dictionary<ScrollObject, float> m_scrollObjects = new Dictionary<ScrollObject, float>();
+
     public GameInput gameInput;
     public float maxHeight;
     public float flapVelocity;
     public float dashVelocity;
     public float relativeVelocityX;
+
+    public GameObject dashAttackCollision;
+    public GameObject damageCollision;
+    public float hitStopDuration = 0.2f;
+    public AnimationCurve hitStopTimeScaling;
+
     public GameObject sprite;
     public AudioClip m_dashSound;
 
@@ -65,36 +74,63 @@ public class PlayerController : MonoBehaviour
 
         if (rb2d.isKinematic) return;
 
-        StartCoroutine(DashCoroutine());
+        m_runningDashCoroutin = StartCoroutine(DashCoroutine());
     }
 
     IEnumerator DashCoroutine()
     {
         //
+        OnBeginDash();
+
+        yield return new WaitForSeconds(0.5f); // SpriteTrailRenderer の残像持続時間と合わせる
+
+        OnEndDash();
+    }
+
+    IEnumerator HitStopCoroutine()
+    {
+        float t = 0;
+
+        while (t < hitStopDuration)
+        {
+            Time.timeScale = Mathf.Clamp01(hitStopTimeScaling.Evaluate(t / hitStopDuration));
+
+            t += Time.unscaledDeltaTime;
+
+            yield return new WaitForEndOfFrame();
+        }
+
+        Time.timeScale = 1;
+    }
+
+    void OnBeginDash()
+    {
         rb2d.velocity = new Vector2(rb2d.velocity.x, dashVelocity);
 
+        dashAttackCollision.SetActive(true);
+        damageCollision.SetActive(false);
         m_trailRenderer.SetEnabled(true);
 
         m_audioSource.PlayOneShot(m_dashSound);
 
-        Dictionary<ScrollObject, float> scrollObjects = new Dictionary<ScrollObject, float>();
-
+        m_scrollObjects.Clear();
         ScrollObject[] objects = FindObjectsOfType<ScrollObject>();
         foreach (var obj in objects)
         {
-            scrollObjects.Add(obj, obj.speed);
+            m_scrollObjects.Add(obj, obj.speed);
         }
 
-        foreach (var so in scrollObjects) so.Key.speed *= 3;
+        foreach (var so in m_scrollObjects) so.Key.speed *= 3;
+    }
 
-        yield return new WaitForSeconds(0.5f); // SpriteTrailRenderer の残像持続時間と合わせる
-
+    void OnEndDash()
+    {
         // 速度を戻す
-        foreach (var so in scrollObjects) so.Key.speed = so.Value;
-
-        yield return new WaitForSeconds(0.2f);
+        foreach (var so in m_scrollObjects) so.Key.speed = so.Value;
 
         m_trailRenderer.SetEnabled(false);
+        damageCollision.SetActive(true);
+        dashAttackCollision.SetActive(false);
     }
 
     void ApplyAngle()
@@ -115,14 +151,24 @@ public class PlayerController : MonoBehaviour
         sprite.transform.localRotation = Quaternion.Euler(0.0f, 0.0f, angle);
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    public void HitBack()
     {
-        if (isDead) return;
-
-        if (collision.gameObject.CompareTag("Item"))
+        if (m_runningDashCoroutin == null)
         {
             return;
         }
+
+        StopCoroutine(m_runningDashCoroutin);
+        OnEndDash();
+
+        StartCoroutine(HitStopCoroutine());
+
+        Flap();
+    }
+
+    public void Clash()
+    {
+        if (isDead) return;
 
         Camera.main.SendMessage("Clash");
 
