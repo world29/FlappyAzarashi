@@ -2658,6 +2658,10 @@ PrefabInstance:
       propertyPath: maskTexture
       value: 
       objectReference: {fileID: 2800000, guid: 0eb1c08c29b947d4cba3e1690ba0bac5, type: 3}
+    - target: {fileID: 11486218, guid: 53c22e1773be7f84aad8ed8b7b58fa6e, type: 3}
+      propertyPath: m_RaycastTarget
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 22424616, guid: 53c22e1773be7f84aad8ed8b7b58fa6e, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -3427,12 +3431,12 @@ PrefabInstance:
     - target: {fileID: 3731231860899529060, guid: 6d9beb114f19bfd428dec74644a99b48,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 29.92
+      value: 29.6
       objectReference: {fileID: 0}
     - target: {fileID: 3731231860899529060, guid: 6d9beb114f19bfd428dec74644a99b48,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 7.63
+      value: 7.77
       objectReference: {fileID: 0}
     - target: {fileID: 3731231860899529060, guid: 6d9beb114f19bfd428dec74644a99b48,
         type: 3}
