@@ -26,6 +26,7 @@ public class PlayerController : MonoBehaviour
     public GameObject dashAttackCollision;
     public GameObject damageCollision;
     public float m_hitStopTime = 0.1f;
+    public bool m_dashHitCameraShake = false;
 
     public GameObject sprite;
     public AudioClip m_dashSound;
@@ -166,6 +167,10 @@ public class PlayerController : MonoBehaviour
 
         // ヒット時の演出
         m_audioSource.PlayOneShot(m_dashHitSound);
+        if (m_dashHitCameraShake)
+        {
+            Camera.main.SendMessage("Shake");
+        }
 
         StartCoroutine(HitStopCoroutine());
 
