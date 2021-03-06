@@ -12,6 +12,10 @@ public class BreakableSprite : MonoBehaviour
     // 破片の数
     public int m_polygonCount = 10;
 
+    // 破片が属するレイヤー。カスタムエディタでフィールドを入力する
+    [Layer]
+    public int m_pieceLayer;
+
     SpriteRenderer m_spriteRenderer;
     List<GameObject> m_pieces = new List<GameObject>();
 
@@ -35,6 +39,7 @@ public class BreakableSprite : MonoBehaviour
 
             // 子オブジェクトとして生成
             var go = new GameObject("piece");
+            go.layer = m_pieceLayer;
 
             // コンポーネントの設定
             var sr = go.AddComponent<SpriteRenderer>();

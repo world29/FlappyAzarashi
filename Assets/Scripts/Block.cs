@@ -8,16 +8,8 @@ public class Block : MonoBehaviour
     public float maxHeight;
     public GameObject root;
 
-    // Start is called before the first frame update
     void Start()
     {
-        ChangeHeight();
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 
     void ChangeHeight()

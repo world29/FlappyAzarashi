@@ -10,12 +10,15 @@ public class PlayerController : MonoBehaviour
     bool isDead;
     SpriteTrailRenderer m_trailRenderer;
     AudioSource m_audioSource;
+    GameObject m_gameController;
 
     Coroutine m_runningDashCoroutin;
     Dictionary<ScrollObject, float> m_scrollObjects = new Dictionary<ScrollObject, float>();
 
     public GameInput gameInput;
     public float maxHeight;
+    public float m_speed = 1;
+    public float m_dashSpeed = 2;
     public float flapVelocity;
     public float dashVelocity;
     public float relativeVelocityX;
@@ -42,6 +45,7 @@ public class PlayerController : MonoBehaviour
 
     void Start()
     {
+        m_gameController = GameObject.FindWithTag("GameController");
     }
 
     void Update()
@@ -65,7 +69,7 @@ public class PlayerController : MonoBehaviour
 
         if (rb2d.isKinematic) return;
 
-        rb2d.velocity = new Vector2(rb2d.velocity.x, flapVelocity);
+        rb2d.velocity = new Vector2(m_speed, flapVelocity);
     }
 
     public void Dash()
@@ -103,7 +107,7 @@ public class PlayerController : MonoBehaviour
 
     void OnBeginDash()
     {
-        rb2d.velocity = new Vector2(rb2d.velocity.x, dashVelocity);
+        rb2d.velocity = new Vector2(m_dashSpeed, dashVelocity);
 
         dashAttackCollision.SetActive(true);
         damageCollision.SetActive(false);
@@ -175,6 +179,16 @@ public class PlayerController : MonoBehaviour
         Camera.main.SendMessage("Clash");
 
         isDead = true;
+    }
+
+    public void PickupItem(ItemType itemType)
+    {
+        switch (itemType)
+        {
+            case ItemType.StageClear:
+                m_gameController.SendMessage("GameClear");
+                break;
+        }
     }
 
     public void SetSteerActive(bool active)

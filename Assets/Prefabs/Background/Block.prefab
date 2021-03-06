@@ -79,7 +79,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8469360565102901272}
-  - component: {fileID: 8469360565102901273}
   - component: {fileID: 8469360565102901279}
   m_Layer: 0
   m_Name: Block
@@ -103,21 +102,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &8469360565102901273
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8469360565102901274}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 86edd1e23f6289845b15bf810b920c3b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 3
-  startPosition: 8
-  endPosition: -24
 --- !u!114 &8469360565102901279
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -130,8 +114,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d54cfde0c07a7d4bbade36014904405, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  minHeight: -1.9
-  maxHeight: 4.45
+  minHeight: -6
+  maxHeight: 1.25
   root: {fileID: 8469360566212146688}
 --- !u!1 &8469360565190388465
 GameObject:

@@ -8,28 +8,33 @@ public class ScrollObject : MonoBehaviour
     public float startPosition;
     public float endPosition;
 
-    // Start is called before the first frame update
-    void Start()
+    private Vector2 m_spriteSize;
+    private Vector3 m_basePosition;
+
+    private void Start()
     {
-        
+        var sr = GetComponent<SpriteRenderer>();
+        m_spriteSize = sr.sprite.bounds.size;
+
+        m_basePosition = transform.position;
     }
 
-    // Update is called once per frame
-    void Update()
+    void LateUpdate()
     {
         transform.Translate(-1 * speed * Time.deltaTime, 0, 0);
 
-        if (transform.position.x <= endPosition) ScrollEnd();
+        if (transform.position.x < (Camera.main.transform.position.x + endPosition)) ScrollEnd();
     }
 
     void ScrollEnd()
     {
-        float diff = transform.position.x - endPosition;
-        Vector3 restartPosition = transform.position;
-        restartPosition.x = startPosition + diff;
+        var offsetX = Mathf.Abs(endPosition - startPosition);
+        var newPos = new Vector3(m_basePosition.x + offsetX, m_basePosition.y, m_basePosition.z);
 
-        transform.position = restartPosition;
+        transform.position = newPos;
 
         SendMessage("OnScrollEnd", SendMessageOptions.DontRequireReceiver);
+
+        m_basePosition = newPos;
     }
 }

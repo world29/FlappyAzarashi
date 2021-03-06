@@ -11,6 +11,7 @@ public class PlayerCollisionHandler : MonoBehaviour
         Obstacle,
         Damage,
         DashAttack,
+        Item,
     }
 
     public CollisionHandlerType m_handlerType;
@@ -27,12 +28,6 @@ public class PlayerCollisionHandler : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        //TODO: アイテム取得用のコリジョンタイプを追加して、例外処理をなくす
-        if (collision.gameObject.layer == LayerMask.NameToLayer("Item"))
-        {
-            return;
-        }
-
         switch (m_handlerType)
         {
             case CollisionHandlerType.Obstacle:
@@ -41,6 +36,10 @@ public class PlayerCollisionHandler : MonoBehaviour
                 break;
             case CollisionHandlerType.DashAttack:
                 player.HitBack();
+                break;
+            case CollisionHandlerType.Item:
+                var item = collision.gameObject.GetComponent<Item>();
+                player.PickupItem(item.m_itemType);
                 break;
         }
     }

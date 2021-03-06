@@ -18,9 +18,9 @@ public class GameController : MonoBehaviour
     int score;
 
     public PlayerController azarashi;
-    public GameObject blocks;
     public Text scoreText;
     public Text stateText;
+    public Fade m_fade;
     public GameInput gameInput;
 
     public AudioClip m_gameOverBGM;
@@ -61,7 +61,6 @@ public class GameController : MonoBehaviour
         state = State.Ready;
 
         azarashi.SetSteerActive(false);
-        blocks.SetActive(false);
 
         scoreText.text = "Score : " + 0;
 
@@ -74,7 +73,6 @@ public class GameController : MonoBehaviour
         state = State.Play;
 
         azarashi.SetSteerActive(true);
-        blocks.SetActive(true);
 
         azarashi.Flap();
 
@@ -109,10 +107,13 @@ public class GameController : MonoBehaviour
         state = State.GameClear;
 
         azarashi.SetSteerActive(false);
-        blocks.SetActive(false);
 
         stateText.gameObject.SetActive(true);
         stateText.text = "Stage Clear";
+
+        m_fade.FadeIn(3, () => {
+            Reload();
+        });
     }
 
     public void IncreaseScore()

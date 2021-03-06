@@ -21,8 +21,8 @@ TagManager:
   - PlayerDashAttack
   - PlayerDamage
   - PlayerObstacle
-  - 
-  - 
+  - EnemyPiece
+  - PlayerItem
   - 
   - 
   - 
