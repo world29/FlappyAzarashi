@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
 {
@@ -27,6 +26,7 @@ public class PlayerController : MonoBehaviour
     public GameObject damageCollision;
     public float m_hitStopTime = 0.1f;
     public bool m_dashHitCameraShake = false;
+    public bool m_jumpTrail = false;
 
     public GameObject sprite;
     public AudioClip m_dashSound;
@@ -70,7 +70,7 @@ public class PlayerController : MonoBehaviour
 
         if (rb2d.isKinematic) return;
 
-        rb2d.velocity = new Vector2(m_speed, flapVelocity);
+        StartCoroutine(FlapCoroutine());
     }
 
     public void Dash()
@@ -80,6 +80,26 @@ public class PlayerController : MonoBehaviour
         if (rb2d.isKinematic) return;
 
         m_runningDashCoroutin = StartCoroutine(DashCoroutine());
+    }
+
+    IEnumerator FlapCoroutine()
+    {
+        rb2d.velocity = new Vector2(m_speed, flapVelocity);
+
+        const float trailTime = 0.3f;
+
+        if (m_jumpTrail)
+        {
+            m_trailRenderer.m_TrailTime = trailTime;
+            m_trailRenderer.SetEnabled(true);
+        }
+
+        yield return new WaitForSeconds(trailTime);
+
+        if (m_jumpTrail)
+        {
+            m_trailRenderer.SetEnabled(false);
+        }
     }
 
     IEnumerator DashCoroutine()
@@ -112,6 +132,8 @@ public class PlayerController : MonoBehaviour
 
         dashAttackCollision.SetActive(true);
         damageCollision.SetActive(false);
+
+        m_trailRenderer.m_TrailTime = 0.5f;
         m_trailRenderer.SetEnabled(true);
 
         m_audioSource.PlayOneShot(m_dashSound);

@@ -83,6 +83,7 @@ MonoBehaviour:
   damageCollision: {fileID: 5976933182449291413}
   m_hitStopTime: 0
   m_dashHitCameraShake: 1
+  m_jumpTrail: 1
   sprite: {fileID: 492067596778591045}
   m_dashSound: {fileID: 8300000, guid: 69d6833d9d32b2d40ba972e697af118c, type: 3}
   m_dashHitSound: {fileID: 8300000, guid: c00c227581eceef4abd43e5f6d31a0ca, type: 3}
