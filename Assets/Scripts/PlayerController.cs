@@ -12,7 +12,6 @@ public class PlayerController : MonoBehaviour
     GameObject m_gameController;
 
     Coroutine m_runningDashCoroutin;
-    Dictionary<ScrollObject, float> m_scrollObjects = new Dictionary<ScrollObject, float>();
 
     public GameInput gameInput;
     public float maxHeight;
@@ -137,22 +136,10 @@ public class PlayerController : MonoBehaviour
         m_trailRenderer.SetEnabled(true);
 
         m_audioSource.PlayOneShot(m_dashSound);
-
-        m_scrollObjects.Clear();
-        ScrollObject[] objects = FindObjectsOfType<ScrollObject>();
-        foreach (var obj in objects)
-        {
-            m_scrollObjects.Add(obj, obj.speed);
-        }
-
-        foreach (var so in m_scrollObjects) so.Key.speed *= 3;
     }
 
     void OnEndDash()
     {
-        // 速度を戻す
-        foreach (var so in m_scrollObjects) so.Key.speed = so.Value;
-
         m_trailRenderer.SetEnabled(false);
         damageCollision.SetActive(true);
         dashAttackCollision.SetActive(false);

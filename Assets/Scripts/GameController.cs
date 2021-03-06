@@ -84,10 +84,6 @@ public class GameController : MonoBehaviour
     {
         state = State.GameOver;
 
-        ScrollObject[] scrollObjects = FindObjectsOfType<ScrollObject>();
-
-        foreach (ScrollObject so in scrollObjects) so.enabled = false;
-
         stateText.gameObject.SetActive(true);
         stateText.text = "GameOver";
 
