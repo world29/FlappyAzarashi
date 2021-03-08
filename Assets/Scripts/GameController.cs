@@ -90,6 +90,8 @@ public class GameController : MonoBehaviour
         m_audioSource.clip = m_gameOverBGM;
         m_audioSource.loop = false;
         m_audioSource.Play();
+
+        StopScroll();
     }
 
     void Reload()
@@ -116,5 +118,14 @@ public class GameController : MonoBehaviour
     {
         score++;
         scoreText.text = "Score : " + score;
+    }
+
+    public void StopScroll()
+    {
+        var scrollObjects = GameObject.FindObjectsOfType<Background>();
+        foreach (var so in scrollObjects)
+        {
+            so.ScrollEnabled = false;
+        }
     }
 }
