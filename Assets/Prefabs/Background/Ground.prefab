@@ -262,7 +262,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 739c24d0656c5a8468c6802cf027bbfa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_speed: 0
+  m_scrollSpeed: 2
+  m_parallax: 0
   m_borderRight: 6
   m_nextOffset: 24
 --- !u!1 &9123555780602835985

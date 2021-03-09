@@ -66,6 +66,8 @@ public class GameController : MonoBehaviour
 
         stateText.gameObject.SetActive(true);
         stateText.text = "Ready";
+
+        StartDummyScroll();
     }
 
     void GameStart()
@@ -78,6 +80,8 @@ public class GameController : MonoBehaviour
 
         stateText.gameObject.SetActive(false);
         stateText.text = "";
+
+        StartParallaxScroll();
     }
 
     void GameOver()
@@ -120,12 +124,30 @@ public class GameController : MonoBehaviour
         scoreText.text = "Score : " + score;
     }
 
+    public void StartDummyScroll()
+    {
+        var scrollObjects = GameObject.FindObjectsOfType<Background>();
+        foreach (var so in scrollObjects)
+        {
+            so.StartDummyScroll();
+        }
+    }
+
+    public void StartParallaxScroll()
+    {
+        var scrollObjects = GameObject.FindObjectsOfType<Background>();
+        foreach (var so in scrollObjects)
+        {
+            so.StartParallaxScroll();
+        }
+    }
+
     public void StopScroll()
     {
         var scrollObjects = GameObject.FindObjectsOfType<Background>();
         foreach (var so in scrollObjects)
         {
-            so.ScrollEnabled = false;
+            so.StopScroll();
         }
     }
 }
