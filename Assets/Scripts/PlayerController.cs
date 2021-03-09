@@ -11,7 +11,7 @@ public class PlayerController : MonoBehaviour
     AudioSource m_audioSource;
     GameObject m_gameController;
 
-    Coroutine m_runningDashCoroutin;
+    Coroutine m_runningDashCoroutine;
 
     public GameInput gameInput;
     public float maxHeight;
@@ -19,6 +19,8 @@ public class PlayerController : MonoBehaviour
     public float m_dashSpeed = 2;
     public float flapVelocity;
     public float dashVelocity;
+    [Range(-180, 0)]
+    public float m_dashAngle = -90;
     public Vector2 m_hitBackVelocity;
     public float relativeVelocityX;
 
@@ -35,6 +37,11 @@ public class PlayerController : MonoBehaviour
     public bool IsDead()
     {
         return isDead;
+    }
+
+    public bool IsDash()
+    {
+        return m_runningDashCoroutine != null;
     }
 
     private void Awake()
@@ -61,7 +68,8 @@ public class PlayerController : MonoBehaviour
             Dash();
         }
 
-        ApplyAngle();
+        float offsetAngle = IsDash() ? m_dashAngle : 0;
+        ApplyAngle(offsetAngle);
     }
 
     public void Flap()
@@ -79,7 +87,7 @@ public class PlayerController : MonoBehaviour
 
         if (rb2d.isKinematic) return;
 
-        m_runningDashCoroutin = StartCoroutine(DashCoroutine());
+        m_runningDashCoroutine = StartCoroutine(DashCoroutine());
     }
 
     IEnumerator FlapCoroutine()
@@ -158,9 +166,11 @@ public class PlayerController : MonoBehaviour
         }
         damageCollision.SetActive(true);
         dashAttackCollision.SetActive(false);
+
+        m_runningDashCoroutine = null;
     }
 
-    void ApplyAngle()
+    void ApplyAngle(float offsetAngleInDegree)
     {
         float targetAngle;
 
@@ -173,6 +183,8 @@ public class PlayerController : MonoBehaviour
             targetAngle = Mathf.Atan2(rb2d.velocity.y, relativeVelocityX) * Mathf.Rad2Deg;
         }
 
+        targetAngle += offsetAngleInDegree;
+
         angle = Mathf.Lerp(angle, targetAngle, Time.deltaTime * 10.0f);
 
         sprite.transform.localRotation = Quaternion.Euler(0.0f, 0.0f, angle);
@@ -180,13 +192,13 @@ public class PlayerController : MonoBehaviour
 
     public void HitBack()
     {
-        if (m_runningDashCoroutin == null)
+        if (m_runningDashCoroutine == null)
         {
             return;
         }
 
         // ダッシュをキャンセルする
-        StopCoroutine(m_runningDashCoroutin);
+        StopCoroutine(m_runningDashCoroutine);
         OnEndDash(true);
 
         // ヒット時の演出
