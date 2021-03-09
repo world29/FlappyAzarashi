@@ -17,6 +17,8 @@ public class SpriteTrailRenderer : MonoBehaviour
     private List<GameObject> m_TrailObjectsInUse;
     private Queue<GameObject> m_TrailObjectsNotInUse;
 
+    private Color m_nextColor;
+
     private void Start()
     {
         m_SpawnInterval = m_TrailTime / m_TrailSegments;
@@ -29,6 +31,8 @@ public class SpriteTrailRenderer : MonoBehaviour
             trail.transform.SetParent(transform);
             m_TrailObjectsNotInUse.Enqueue(trail);
         }
+
+        m_nextColor = m_TrailObject.GetComponent<SpriteTrailObject>().m_StartColor;
 
         m_Enabled = false;
     }
@@ -48,12 +52,22 @@ public class SpriteTrailRenderer : MonoBehaviour
                     SpriteTrailObject trailObject = trail.GetComponent<SpriteTrailObject>();
 
                     trailObject.Initialize(m_TrailTime, m_LeadingSprite.sprite, transform.position, m_LeadingSprite.transform.rotation, this);
+                    OverrideTrailColor(trailObject, m_nextColor);
                     m_TrailObjectsInUse.Add(trail);
 
                     m_SpawnTimer = 0;
                 }
             }
         }
+    }
+
+    void OverrideTrailColor(SpriteTrailObject trailObject, Color c)
+    {
+        var startAlpha = trailObject.m_StartColor.a;
+        var endAlpha = trailObject.m_EndColor.a;
+
+        trailObject.m_StartColor = new Color(c.r, c.g, c.b, startAlpha);
+        trailObject.m_EndColor = new Color(c.r, c.g, c.b, endAlpha);
     }
 
     public void RemoveTrailObject(GameObject obj)
@@ -73,4 +87,10 @@ public class SpriteTrailRenderer : MonoBehaviour
             m_SpawnTimer = m_SpawnInterval;
         }
     }
+
+    public void SetNextColor(Color c)
+    {
+        m_nextColor = c;
+    }
+
 }

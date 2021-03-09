@@ -29,6 +29,8 @@ public class PlayerController : MonoBehaviour
     public float m_hitStopTime = 0.1f;
     public bool m_dashHitCameraShake = false;
     public bool m_jumpTrail = false;
+    public Color m_flapTrailColor = Color.blue;
+    public Color m_dashTrailColor = Color.red;
 
     public GameObject sprite;
     public AudioClip m_dashSound;
@@ -98,6 +100,7 @@ public class PlayerController : MonoBehaviour
 
         if (m_jumpTrail)
         {
+            ChangeTrailColor(m_flapTrailColor);
             m_trailRenderer.m_TrailTime = trailTime;
             m_trailRenderer.SetEnabled(true);
         }
@@ -152,6 +155,7 @@ public class PlayerController : MonoBehaviour
         dashAttackCollision.SetActive(true);
         damageCollision.SetActive(false);
 
+        ChangeTrailColor(m_dashTrailColor);
         m_trailRenderer.m_TrailTime = 0.5f;
         m_trailRenderer.SetEnabled(true);
 
@@ -188,6 +192,11 @@ public class PlayerController : MonoBehaviour
         angle = Mathf.Lerp(angle, targetAngle, Time.deltaTime * 10.0f);
 
         sprite.transform.localRotation = Quaternion.Euler(0.0f, 0.0f, angle);
+    }
+
+    void ChangeTrailColor(Color c)
+    {
+        m_trailRenderer.SetNextColor(c);
     }
 
     public void HitBack()
