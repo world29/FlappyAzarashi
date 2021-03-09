@@ -10,9 +10,10 @@ GameObject:
   m_Component:
   - component: {fileID: 6608966066466292766}
   - component: {fileID: 6608966066466292760}
-  - component: {fileID: 6608966066466292767}
+  - component: {fileID: 2452257641673708511}
   - component: {fileID: 6608966066466292762}
-  - component: {fileID: 3007990719846435065}
+  - component: {fileID: 1085787151548793064}
+  - component: {fileID: 2717311540983124793}
   m_Layer: 8
   m_Name: Hyottoco
   m_TagString: Untagged
@@ -73,9 +74,9 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 64521419150d14b628aac3ac35889e50, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 0e7d8ce8896477844bf4d10b7c54e4d9, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_FlipX: 1
+  m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
   m_Size: {x: 1.41, y: 1.76}
@@ -84,8 +85,8 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!61 &6608966066466292767
-BoxCollider2D:
+--- !u!58 &2452257641673708511
+CircleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -97,19 +98,9 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.09564826, y: 0.09321821}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1.41, y: 1.76}
-    newSize: {x: 1.41, y: 1.76}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
+  m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Size: {x: 0.8624988, y: 1.1269085}
-  m_EdgeRadius: 0
+  m_Radius: 0.48
 --- !u!50 &6608966066466292762
 Rigidbody2D:
   serializedVersion: 4
@@ -131,7 +122,7 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!114 &3007990719846435065
+--- !u!114 &1085787151548793064
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -140,8 +131,24 @@ MonoBehaviour:
   m_GameObject: {fileID: 6608966066466292765}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9ab0c7969d1fd9c47801d01c3e71a719, type: 3}
+  m_Script: {fileID: 11500000, guid: b4962b7cae6342942ba7dab07f145380, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shotInterval: 1
-  bullet: {fileID: 297593610375146614, guid: a66c6358c3d973d4ebcc3377f2e88228, type: 3}
+  m_lookatPlayer: 1
+  m_lookatRotationLimit: 30
+  m_lookatRotationSpeed: 30
+--- !u!114 &2717311540983124793
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6608966066466292765}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1feded38c39656d4fa0a62fa9d0493a6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_collisionImpulseScale: 1
+  m_polygonCount: 16
+  m_pieceLayer: 15
