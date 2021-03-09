@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 3731231860899529067}
   - component: {fileID: 9195478231199800751}
   - component: {fileID: 6569884253624218143}
+  - component: {fileID: 4504297457571622808}
   m_Layer: 8
   m_Name: Otafuku
   m_TagString: Untagged
@@ -109,7 +110,7 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3731231860899529056}
-  m_BodyType: 0
+  m_BodyType: 1
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
@@ -152,3 +153,22 @@ MonoBehaviour:
   m_collisionImpulseScale: 1
   m_polygonCount: 16
   m_pieceLayer: 15
+--- !u!95 &4504297457571622808
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3731231860899529056}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 5636a9492f5aa2047ab902a872471df4, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 1
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
