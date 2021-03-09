@@ -94,7 +94,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 739c24d0656c5a8468c6802cf027bbfa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_scrollSpeed: 0.2
-  m_parallax: 0.8
+  m_scrollSpeed: 0.3
+  m_parallax: 0.7
   m_borderRight: 2
   m_nextOffset: 16
