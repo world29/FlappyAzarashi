@@ -19,6 +19,7 @@ public class PlayerController : MonoBehaviour
     public float m_dashSpeed = 2;
     public float flapVelocity;
     public float dashVelocity;
+    public Vector2 m_hitBackVelocity;
     public float relativeVelocityX;
 
     public GameObject dashAttackCollision;
@@ -108,7 +109,7 @@ public class PlayerController : MonoBehaviour
 
         yield return new WaitForSeconds(0.5f); // SpriteTrailRenderer の残像持続時間と合わせる
 
-        OnEndDash();
+        OnEndDash(false);
     }
 
     IEnumerator HitStopCoroutine()
@@ -125,6 +126,17 @@ public class PlayerController : MonoBehaviour
         Time.timeScale = 1;
     }
 
+    IEnumerator HitBackCoroutine()
+    {
+        rb2d.velocity = m_hitBackVelocity;
+
+        const float trailTime = 0.3f;
+
+        yield return new WaitForSeconds(trailTime);
+
+        m_trailRenderer.SetEnabled(false);
+    }
+
     void OnBeginDash()
     {
         rb2d.velocity = new Vector2(m_dashSpeed, dashVelocity);
@@ -138,9 +150,12 @@ public class PlayerController : MonoBehaviour
         m_audioSource.PlayOneShot(m_dashSound);
     }
 
-    void OnEndDash()
+    void OnEndDash(bool canceled)
     {
-        m_trailRenderer.SetEnabled(false);
+        if (!canceled)
+        {
+            m_trailRenderer.SetEnabled(false);
+        }
         damageCollision.SetActive(true);
         dashAttackCollision.SetActive(false);
     }
@@ -172,7 +187,7 @@ public class PlayerController : MonoBehaviour
 
         // ダッシュをキャンセルする
         StopCoroutine(m_runningDashCoroutin);
-        OnEndDash();
+        OnEndDash(true);
 
         // ヒット時の演出
         m_audioSource.PlayOneShot(m_dashHitSound);
@@ -183,7 +198,7 @@ public class PlayerController : MonoBehaviour
 
         StartCoroutine(HitStopCoroutine());
 
-        Flap();
+        StartCoroutine(HitBackCoroutine());
     }
 
     public void Clash()

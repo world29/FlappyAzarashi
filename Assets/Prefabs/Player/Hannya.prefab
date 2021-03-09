@@ -78,6 +78,7 @@ MonoBehaviour:
   m_dashSpeed: 7
   flapVelocity: 7
   dashVelocity: 7
+  m_hitBackVelocity: {x: -3, y: 7}
   relativeVelocityX: 10
   dashAttackCollision: {fileID: 5497383255364546253}
   damageCollision: {fileID: 5976933182449291413}
