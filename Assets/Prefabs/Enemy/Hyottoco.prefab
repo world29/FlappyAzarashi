@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 2452257641673708511}
   - component: {fileID: 6608966066466292762}
   - component: {fileID: 1085787151548793064}
+  - component: {fileID: 4775284943123204686}
   - component: {fileID: 2717311540983124793}
   m_Layer: 8
   m_Name: Hyottoco
@@ -137,6 +138,21 @@ MonoBehaviour:
   m_lookatPlayer: 1
   m_lookatRotationLimit: 30
   m_lookatRotationSpeed: 30
+--- !u!114 &4775284943123204686
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6608966066466292765}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 172f190bac0f00f4a95b1f254090f704, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_controlPoints: []
+  m_loop: 1
+  m_speed: 0.3
 --- !u!114 &2717311540983124793
 MonoBehaviour:
   m_ObjectHideFlags: 0
