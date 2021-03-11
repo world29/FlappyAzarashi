@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 2452257641673708511}
   - component: {fileID: 6608966066466292762}
   - component: {fileID: 1085787151548793064}
+  - component: {fileID: 4240613988770664641}
   - component: {fileID: 4775284943123204686}
   - component: {fileID: 2717311540983124793}
   m_Layer: 8
@@ -138,6 +139,22 @@ MonoBehaviour:
   m_lookatPlayer: 1
   m_lookatRotationLimit: 30
   m_lookatRotationSpeed: 30
+--- !u!114 &4240613988770664641
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6608966066466292765}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9ab0c7969d1fd9c47801d01c3e71a719, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_shotInterval: 1
+  m_shotSpeed: 10
+  m_bulletObject: {fileID: 5991312074287378862, guid: 51fa276fca684a74e999fd1e5631df90,
+    type: 3}
 --- !u!114 &4775284943123204686
 MonoBehaviour:
   m_ObjectHideFlags: 0

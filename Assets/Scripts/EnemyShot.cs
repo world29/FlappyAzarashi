@@ -5,81 +5,53 @@ using UnityEngine;
 // 画面内いる間、一定間隔でプレイヤーに向けて弾を撃ってくる敵
 public class EnemyShot : MonoBehaviour
 {
-    public float shotInterval = 0.5f;
-    public BulletController bullet;
+    public float m_shotInterval = 1f;
+    public float m_shotSpeed = 1f;
+    public Rigidbody2D m_bulletObject;
 
-    bool isActive;
-    float timeSinceActivated;
-    float position_y;
-
-    float shotTimer;
-
-    GameObject gameController;
-    GameObject player;
+    GameObject m_player;
 
     void Start()
     {
-        gameController = GameObject.FindWithTag("GameController");
-        player = GameObject.FindWithTag("Player");
+        m_player = GameObject.FindWithTag("Player");
 
-        isActive = false;
-        position_y = transform.position.y;
-        shotTimer = shotInterval;
-    }
-
-    private void Update()
-    {
-        if (!isActive) return;
-
-        // 移動
-        const float amplitude = 1;
-        const float frequency = 0.3f;
-
-        float elapsed = Time.timeSinceLevelLoad - timeSinceActivated;
-
-        float offset = Mathf.Sin(2 * Mathf.PI * elapsed * frequency) * amplitude;
-
-        var newPosition = transform.localPosition;
-        newPosition.y = position_y + offset;
-        transform.localPosition = newPosition;
-
-        // ショット
-        shotTimer -= Time.deltaTime;
-        if (shotTimer < 0)
-        {
-            Shot();
-            shotTimer = shotInterval;
-        }
+        StartCoroutine(ShotCoroutine());
     }
 
     void Shot()
     {
-        var vec = player.transform.position - transform.position;
+        var toPlayer = m_player.transform.position - transform.position;
 
-        if (vec.x >= 0) return;
+        if (toPlayer.x >= 0) return;
 
-        var cloned = GameObject.Instantiate(bullet, transform.position, Quaternion.identity, transform);
-        cloned.Direction = vec.normalized;
+        var rb = GameObject.Instantiate(m_bulletObject, transform.position, Quaternion.identity);
+        rb.velocity = toPlayer.normalized * m_shotSpeed;
     }
 
-    private void OnBecameVisible()
+    IEnumerator ShotCoroutine()
     {
-        isActive = true;
-        timeSinceActivated = Time.timeSinceLevelLoad;
-    }
+        float t = 0;
 
-    private void OnBecameInvisible()
-    {
-        isActive = false;
-    }
-
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        if (collision.gameObject.CompareTag("Player"))
+        while (true)
         {
-            return;
-        }
+            t += Time.deltaTime;
 
-        gameObject.SetActive(false);
+            if (t > m_shotInterval)
+            {
+                Shot();
+                t = 0;
+            }
+
+            yield return new WaitForEndOfFrame();
+        }
+    }
+
+    private void OnDrawGizmos()
+    {
+        var toPlayer = GameObject.FindWithTag("Player").transform.position - transform.position;
+
+        var line = toPlayer.normalized * 3;
+
+        Debug.DrawLine(transform.position, transform.position + line, Color.red);
     }
 }

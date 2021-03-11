@@ -15,7 +15,7 @@ TagManager:
   - 
   - 
   - Enemy
-  - Weapon
+  - EnemyShot
   - Obstacle
   - Item
   - PlayerDashAttack
