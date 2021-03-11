@@ -18,8 +18,19 @@ public class EnemyShot : MonoBehaviour
         StartCoroutine(ShotCoroutine());
     }
 
+    bool IsInCamera(Camera camera)
+    {
+        Rect rect = new Rect(0, 0, 1, 1);
+
+        var viewportPos = camera.WorldToViewportPoint(transform.position);
+
+        return rect.Contains(viewportPos);
+    }
+
     void Shot()
     {
+        if (!IsInCamera(Camera.main)) return;
+
         var toPlayer = m_player.transform.position - transform.position;
 
         if (toPlayer.x >= 0) return;
