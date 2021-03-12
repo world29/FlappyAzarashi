@@ -23,8 +23,8 @@ TagManager:
   - PlayerObstacle
   - EnemyPiece
   - PlayerItem
-  - 
-  - 
+  - PlayerProjectileReflect
+  - PlayerShot
   - 
   - 
   - 

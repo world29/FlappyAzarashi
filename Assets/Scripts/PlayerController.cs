@@ -21,11 +21,12 @@ public class PlayerController : MonoBehaviour
     public float dashVelocity;
     [Range(-180, 0)]
     public float m_dashAngle = -90;
-    public Vector2 m_hitBackVelocity;
+    public float m_hitBackVelocity;
     public float relativeVelocityX;
 
     public GameObject dashAttackCollision;
     public GameObject damageCollision;
+    public GameObject projectileReflectCollision;
     public float m_hitStopTime = 0.1f;
     public bool m_dashHitCameraShake = false;
     public bool m_jumpTrail = false;
@@ -137,9 +138,19 @@ public class PlayerController : MonoBehaviour
         Time.timeScale = 1;
     }
 
-    IEnumerator HitBackCoroutine()
+    IEnumerator HitBackCoroutine(Collision2D hit)
     {
-        rb2d.velocity = m_hitBackVelocity;
+        if (hit.contactCount == 0)
+        {
+            yield break;
+        }
+
+        var contactPoint = hit.contacts[0];
+
+        var hitBackVelocity = Vector3.Reflect(rb2d.velocity, contactPoint.normal);
+        Debug.DrawLine(transform.position, transform.position + hitBackVelocity, Color.red, 3);
+
+        rb2d.velocity = hitBackVelocity;
 
         const float trailTime = 0.3f;
 
@@ -154,6 +165,7 @@ public class PlayerController : MonoBehaviour
 
         dashAttackCollision.SetActive(true);
         damageCollision.SetActive(false);
+        projectileReflectCollision.SetActive(true);
 
         ChangeTrailColor(m_dashTrailColor);
         m_trailRenderer.m_TrailTime = 0.5f;
@@ -168,6 +180,7 @@ public class PlayerController : MonoBehaviour
         {
             m_trailRenderer.SetEnabled(false);
         }
+        projectileReflectCollision.SetActive(false);
         damageCollision.SetActive(true);
         dashAttackCollision.SetActive(false);
 
@@ -199,7 +212,7 @@ public class PlayerController : MonoBehaviour
         m_trailRenderer.SetNextColor(c);
     }
 
-    public void HitBack()
+    public void HitBack(Collision2D hit)
     {
         if (m_runningDashCoroutine == null)
         {
@@ -219,7 +232,7 @@ public class PlayerController : MonoBehaviour
 
         StartCoroutine(HitStopCoroutine());
 
-        StartCoroutine(HitBackCoroutine());
+        StartCoroutine(HitBackCoroutine(hit));
     }
 
     public void Clash()

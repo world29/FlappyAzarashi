@@ -11,14 +11,20 @@ public class BezierMoving : MonoBehaviour
 
     private Coroutine m_coroutine;
 
-    private void Start()
+    private void Update()
     {
-        m_coroutine = StartCoroutine(MoveCoroutine());
+        if (m_coroutine == null)
+        {
+            m_coroutine = StartCoroutine(MoveCoroutine());
+        }
     }
 
     private void OnDestroy()
     {
-        StopCoroutine(m_coroutine);
+        if (m_coroutine != null)
+        {
+            StopCoroutine(m_coroutine);
+        }
     }
 
     IEnumerator MoveCoroutine()

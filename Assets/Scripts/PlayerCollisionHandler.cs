@@ -12,6 +12,7 @@ public class PlayerCollisionHandler : MonoBehaviour
         Damage,
         DashAttack,
         Item,
+        ProjectileReflect,
     }
 
     public CollisionHandlerType m_handlerType;
@@ -26,8 +27,25 @@ public class PlayerCollisionHandler : MonoBehaviour
         Debug.Assert(player != null);
     }
 
+    void ReflectEnemyProjectile(Collision2D collision)
+    {
+        var go = collision.gameObject;
+
+        go.layer = LayerMask.NameToLayer("PlayerShot");
+        var ps = go.GetComponentInChildren<ParticleSystem>();
+        var main = ps.main;
+        main.startColor = new ParticleSystem.MinMaxGradient(Color.blue);
+
+#if DEBUG
+        var rb = go.GetComponent<Rigidbody2D>();
+        Debug.DrawLine(go.transform.position, go.transform.position + (Vector3)rb.velocity, Color.blue);
+#endif
+    }
+
     private void OnCollisionEnter2D(Collision2D collision)
     {
+        Debug.Log(m_handlerType);
+
         switch (m_handlerType)
         {
             case CollisionHandlerType.Obstacle:
@@ -35,11 +53,14 @@ public class PlayerCollisionHandler : MonoBehaviour
                 player.Clash();
                 break;
             case CollisionHandlerType.DashAttack:
-                player.HitBack();
+                player.HitBack(collision);
                 break;
             case CollisionHandlerType.Item:
                 var item = collision.gameObject.GetComponent<Item>();
                 player.PickupItem(item.m_itemType);
+                break;
+            case CollisionHandlerType.ProjectileReflect:
+                ReflectEnemyProjectile(collision);
                 break;
         }
     }
