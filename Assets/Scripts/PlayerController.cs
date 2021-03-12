@@ -163,7 +163,7 @@ public class PlayerController : MonoBehaviour
     {
         rb2d.velocity = new Vector2(m_dashSpeed, dashVelocity);
 
-        dashAttackCollision.SetActive(true);
+        //dashAttackCollision.SetActive(true);
         damageCollision.SetActive(false);
         projectileReflectCollision.SetActive(true);
 
@@ -182,7 +182,7 @@ public class PlayerController : MonoBehaviour
         }
         projectileReflectCollision.SetActive(false);
         damageCollision.SetActive(true);
-        dashAttackCollision.SetActive(false);
+        //dashAttackCollision.SetActive(false);
 
         m_runningDashCoroutine = null;
     }
