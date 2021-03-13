@@ -873,7 +873,7 @@ GameObject:
   - component: {fileID: 372252004}
   - component: {fileID: 372252003}
   m_Layer: 0
-  m_Name: StartButton
+  m_Name: PlayButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3430,7 +3430,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: Start
+  m_Text: PLAY
 --- !u!222 &1285661187
 CanvasRenderer:
   m_ObjectHideFlags: 0
