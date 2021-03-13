@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 348412818859047507}
   - component: {fileID: 4376747664458732281}
   - component: {fileID: 8174428753546127577}
+  - component: {fileID: 1100640191416551895}
   m_Layer: 0
   m_Name: Hannya
   m_TagString: Player
@@ -206,6 +207,25 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!95 &1100640191416551895
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 348412818859047502}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 19131f590e8051f45a0dc4791c89a70b, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &492067596778591045
 GameObject:
   m_ObjectHideFlags: 0

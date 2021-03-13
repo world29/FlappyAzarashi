@@ -3,12 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using UnityEngine.Playables;
+using System.Linq;
 
 public class GameController : MonoBehaviour
 {
     enum State
     {
-        Ready,
+        Intro, // プレイヤーの登場
+        Ready, // プレイ開始可能
         Play,
         GameOver,
         GameClear,
@@ -22,19 +25,21 @@ public class GameController : MonoBehaviour
     public Text stateText;
     public Fade m_fade;
     public GameInput gameInput;
-
     public AudioClip m_gameOverBGM;
+    public PlayableAsset m_introDemo;
 
     private AudioSource m_audioSource;
+    private PlayableDirector m_playableDirector;
 
     private void Awake()
     {
         m_audioSource = GetComponent<AudioSource>();
+        m_playableDirector = GetComponent<PlayableDirector>();
     }
 
     void Start()
     {
-        Ready();
+        Intro();
     }
 
     void LateUpdate()
@@ -53,7 +58,33 @@ public class GameController : MonoBehaviour
             case State.GameClear:
                 if (gameInput.GetButtonDown(GameInput.ButtonType.Main)) Reload();
                 break;
+            default:
+                break;
         }
+    }
+
+    void Intro()
+    {
+        state = State.Intro;
+
+        azarashi.SetSteerActive(false);
+        scoreText.gameObject.SetActive(false);
+        stateText.gameObject.SetActive(false);
+
+        // オブジェクトのバインド情報を設定してからデモを再生
+        var targetAnimator = azarashi.GetComponent<Animator>();
+        var binding = m_introDemo.outputs.First(c => c.streamName == "Animation Track");
+        m_playableDirector.SetGenericBinding(binding.sourceObject, targetAnimator);
+
+        m_playableDirector.stopped += OnStoppedIntroDemo;
+        m_playableDirector.Play(m_introDemo);
+    }
+
+    void OnStoppedIntroDemo(PlayableDirector playableDirector)
+    {
+        playableDirector.stopped -= OnStoppedIntroDemo;
+
+        Ready();
     }
 
     void Ready()

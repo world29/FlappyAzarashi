@@ -4749,6 +4749,7 @@ GameObject:
   - component: {fileID: 1634945652}
   - component: {fileID: 1634945651}
   - component: {fileID: 1634945653}
+  - component: {fileID: 1634945654}
   m_Layer: 0
   m_Name: GameController
   m_TagString: GameController
@@ -4774,6 +4775,7 @@ MonoBehaviour:
   m_fade: {fileID: 409992129}
   gameInput: {fileID: 1194756035}
   m_gameOverBGM: {fileID: 8300000, guid: f4f7dcb8c803648b3b2a8b34d565ab56, type: 3}
+  m_introDemo: {fileID: 11400000, guid: ae7edabedcd376f4bb0fdfd1a07bc678, type: 2}
 --- !u!4 &1634945652
 Transform:
   m_ObjectHideFlags: 0
@@ -4885,6 +4887,23 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!320 &1634945654
+PlayableDirector:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1634945650}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_PlayableAsset: {fileID: 0}
+  m_InitialState: 0
+  m_WrapMode: 2
+  m_DirectorUpdateMode: 1
+  m_InitialTime: 0
+  m_SceneBindings: []
+  m_ExposedReferences:
+    m_References: []
 --- !u!1 &1647284097
 GameObject:
   m_ObjectHideFlags: 0
