@@ -43,6 +43,11 @@ public class GameController : MonoBehaviour
 
     void Start()
     {
+        if (m_checkPoint != null)
+        {
+            m_checkPoint.SavePropsPosition();
+        }
+
         RespawnPlayer();
     }
 
@@ -78,6 +83,8 @@ public class GameController : MonoBehaviour
         {
             azarashi.Respawn();
             azarashi.transform.position = m_checkPoint.transform.position;
+
+            m_checkPoint.RestorePropsPosition();
 
             m_checkPoint.enabled = false;
         }
@@ -224,5 +231,7 @@ public class GameController : MonoBehaviour
     public void SetRespawnPoint(CheckPoint checkPoint)
     {
         m_checkPoint = checkPoint;
+
+        checkPoint.SavePropsPosition();
     }
 }

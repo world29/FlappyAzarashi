@@ -12,8 +12,8 @@ GameObject:
   - component: {fileID: 5648788332146746094}
   - component: {fileID: 5648788332146746095}
   m_Layer: 0
-  m_Name: Props_5
-  m_TagString: Untagged
+  m_Name: Rock
+  m_TagString: Prop
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -99,3 +99,4 @@ MonoBehaviour:
   m_parallax: 0.3
   m_borderRight: 4
   m_nextOffset: 14
+  m_fixedPosition: 0

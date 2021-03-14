@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 6740076514582312662}
   m_Layer: 0
   m_Name: BigTree
-  m_TagString: Untagged
+  m_TagString: Prop
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -99,3 +99,4 @@ MonoBehaviour:
   m_parallax: 0.25
   m_borderRight: 5
   m_nextOffset: 21
+  m_fixedPosition: 0

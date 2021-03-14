@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 2448392085487722744}
   m_Layer: 0
   m_Name: Cloud
-  m_TagString: Untagged
+  m_TagString: Prop
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -99,3 +99,4 @@ MonoBehaviour:
   m_parallax: 0.8
   m_borderRight: 2
   m_nextOffset: 16
+  m_fixedPosition: 0
