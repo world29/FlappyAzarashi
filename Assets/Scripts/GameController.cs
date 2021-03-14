@@ -13,6 +13,7 @@ public class GameController : MonoBehaviour
         Intro, // プレイヤーの登場
         Ready, // プレイ開始可能
         Play,
+        Death, // プレイヤー死亡。コンティニュー可能。
         GameOver,
         GameClear,
     }
@@ -24,9 +25,12 @@ public class GameController : MonoBehaviour
     public Text scoreText;
     public Text stateText;
     public Fade m_fade;
+    public GameObject m_menuOnDeath;
     public GameInput gameInput;
+    public AudioClip m_gameplayBGM;
     public AudioClip m_gameOverBGM;
     public PlayableAsset m_introDemo;
+    public CheckPoint m_checkPoint;
 
     private AudioSource m_audioSource;
     private PlayableDirector m_playableDirector;
@@ -39,7 +43,7 @@ public class GameController : MonoBehaviour
 
     void Start()
     {
-        Intro();
+        RespawnPlayer();
     }
 
     void LateUpdate()
@@ -50,7 +54,9 @@ public class GameController : MonoBehaviour
                 if (gameInput.GetButtonDown(GameInput.ButtonType.Main)) GameStart();
                 break;
             case State.Play:
-                if (azarashi.IsDead()) GameOver();
+                if (azarashi.IsDead()) Death();
+                break;
+            case State.Death:
                 break;
             case State.GameOver:
                 if (gameInput.GetButtonDown(GameInput.ButtonType.Main)) Reload();
@@ -63,9 +69,27 @@ public class GameController : MonoBehaviour
         }
     }
 
+    void RespawnPlayer()
+    {
+        m_menuOnDeath.SetActive(false);
+        m_audioSource.Stop();
+
+        if (m_checkPoint != null)
+        {
+            azarashi.Respawn();
+            azarashi.transform.position = m_checkPoint.transform.position;
+
+            m_checkPoint.enabled = false;
+        }
+
+        Intro();
+    }
+
     void Intro()
     {
         state = State.Intro;
+
+        StopScroll();
 
         azarashi.SetSteerActive(false);
         scoreText.gameObject.SetActive(false);
@@ -91,8 +115,6 @@ public class GameController : MonoBehaviour
     {
         state = State.Ready;
 
-        azarashi.SetSteerActive(false);
-
         scoreText.text = "Score : " + 0;
 
         stateText.gameObject.SetActive(true);
@@ -112,7 +134,24 @@ public class GameController : MonoBehaviour
         stateText.gameObject.SetActive(false);
         stateText.text = "";
 
+        m_audioSource.clip = m_gameplayBGM;
+        m_audioSource.loop = true;
+        m_audioSource.Play();
+
         StartParallaxScroll();
+    }
+
+    void Death()
+    {
+        state = State.Death;
+
+        m_menuOnDeath.SetActive(true);
+
+        m_audioSource.clip = m_gameOverBGM;
+        m_audioSource.loop = false;
+        m_audioSource.Play();
+
+        StopScroll();
     }
 
     void GameOver()
@@ -180,5 +219,10 @@ public class GameController : MonoBehaviour
         {
             so.StopScroll();
         }
+    }
+
+    public void SetRespawnPoint(CheckPoint checkPoint)
+    {
+        m_checkPoint = checkPoint;
     }
 }

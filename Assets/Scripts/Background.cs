@@ -9,6 +9,7 @@ public class Background : MonoBehaviour
     public float m_parallax = 1;
     public float m_borderRight;
     public float m_nextOffset;
+    public bool m_fixedPosition = false;
 
     private bool m_dummyScroll = false;
     private bool m_parallaxScroll = false;
@@ -22,9 +23,9 @@ public class Background : MonoBehaviour
 
     private void Update()
     {
-        if (!m_dummyScroll) return;
+        if (!m_dummyScroll || m_fixedPosition) return;
 
-        Scroll(-m_scrollSpeed * Time.deltaTime);
+        //Scroll(-m_scrollSpeed * Time.deltaTime);
     }
 
     private void LateUpdate()

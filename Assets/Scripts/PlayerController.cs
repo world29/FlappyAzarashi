@@ -256,6 +256,12 @@ public class PlayerController : MonoBehaviour
 
     public void SetSteerActive(bool active)
     {
+        rb2d.velocity = Vector2.zero;
         rb2d.isKinematic = !active;
+    }
+
+    public void Respawn()
+    {
+        isDead = false;
     }
 }
