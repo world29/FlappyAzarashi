@@ -5,9 +5,10 @@ using UnityEngine;
 // 画面内いる間、一定間隔でプレイヤーに向けて弾を撃ってくる敵
 public class EnemyShot : MonoBehaviour
 {
-    public float m_shotInterval = 1f;
-    public float m_shotSpeed = 1f;
+    public float m_shotInterval = 2f;
+    public float m_shotForce = 100f;
     public Rigidbody2D m_bulletObject;
+    public Animator m_animator;
 
     GameObject m_player;
 
@@ -31,12 +32,18 @@ public class EnemyShot : MonoBehaviour
     {
         if (!IsInCamera(Camera.main)) return;
 
-        var toPlayer = m_player.transform.position - transform.position;
+        var shotDirection = Vector2.left;
 
-        if (toPlayer.x >= 0) return;
+        // シーンにプレイヤーがいるならプレイヤーの方向へ発射する
+        if (m_player)
+        {
+            shotDirection = m_player.transform.position - transform.position;
+            shotDirection.Normalize();
+        }
+        Debug.DrawLine(transform.position, transform.position + (Vector3)shotDirection);
 
-        var rb = GameObject.Instantiate(m_bulletObject, transform.position, Quaternion.identity);
-        rb.velocity = toPlayer.normalized * m_shotSpeed;
+        var rb = GameObject.Instantiate(m_bulletObject, transform.position, transform.rotation);
+        rb.AddForce(shotDirection * m_shotForce, ForceMode2D.Impulse);
     }
 
     IEnumerator ShotCoroutine()
@@ -49,7 +56,7 @@ public class EnemyShot : MonoBehaviour
 
             if (t > m_shotInterval)
             {
-                Shot();
+                m_animator.SetTrigger("shot");
                 t = 0;
             }
 
@@ -59,10 +66,14 @@ public class EnemyShot : MonoBehaviour
 
     private void OnDrawGizmos()
     {
-        var toPlayer = GameObject.FindWithTag("Player").transform.position - transform.position;
+        var player = GameObject.FindWithTag("Player");
+        if (player)
+        {
+            var toPlayer = player.transform.position - transform.position;
 
-        var line = toPlayer.normalized * 3;
+            var line = toPlayer.normalized * 3;
 
-        Debug.DrawLine(transform.position, transform.position + line, Color.red);
+            Debug.DrawLine(transform.position, transform.position + line, Color.red);
+        }
     }
 }

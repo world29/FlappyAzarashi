@@ -4,19 +4,15 @@ using UnityEngine;
 
 public class Projectile : MonoBehaviour
 {
-    public Transform m_transform;
+    public float m_lifetime = 5;
 
-    Rigidbody2D m_rigidbody;
-
-    private void Start()
+    private void LateUpdate()
     {
-        m_rigidbody = GetComponent<Rigidbody2D>();
-    }
+        m_lifetime -= Time.deltaTime;
 
-    void ApplyAngle(float offsetAngleInDegree)
-    {
-        float targetAngle = targetAngle = Mathf.Atan2(m_rigidbody.velocity.y, m_rigidbody.velocity.x) * Mathf.Rad2Deg;
-
-        m_transform.localRotation = Quaternion.Euler(0.0f, 0.0f, targetAngle);
+        if (m_lifetime < 0)
+        {
+            GameObject.Destroy(gameObject);
+        }
     }
 }

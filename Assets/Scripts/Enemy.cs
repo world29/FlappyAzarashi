@@ -9,6 +9,8 @@ public class Enemy : MonoBehaviour
     public float m_lookatRotationLimit = 30;
     public float m_lookatRotationSpeed = 10;
 
+    public EnemyShot m_shotAbility;
+
     bool m_active = false;
     GameObject m_player;
 
@@ -71,6 +73,14 @@ public class Enemy : MonoBehaviour
         m_active = false;
 
         gameObject.SetActive(m_active);
+    }
+
+    public void Shot()
+    {
+        if (m_shotAbility != null)
+        {
+            m_shotAbility.gameObject.SendMessage("Shot");
+        }
     }
 
 #if DEBUG
