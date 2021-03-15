@@ -1655,7 +1655,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 519420028}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.4000001, y: 6, z: -10}
+  m_LocalPosition: {x: 2, y: 6, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -1694,6 +1694,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_target: {fileID: 498502622}
   m_offsetX: 2
+  m_speed: 50
 --- !u!1001 &521445762
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2334,7 +2335,7 @@ PrefabInstance:
     - target: {fileID: 6919965073498401557, guid: 61bbdd299813f344e90f63c9144bb34f,
         type: 3}
       propertyPath: m_SpriteTilingProperty.newSize.x
-      value: 8
+      value: 500
       objectReference: {fileID: 0}
     - target: {fileID: 7677483088706411722, guid: 61bbdd299813f344e90f63c9144bb34f,
         type: 3}
@@ -6831,7 +6832,7 @@ PrefabInstance:
     - target: {fileID: 348412818859047500, guid: 03100ff39ebb1d44e990af408abd5e25,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -3.4
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 348412818859047500, guid: 03100ff39ebb1d44e990af408abd5e25,
         type: 3}

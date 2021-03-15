@@ -7,6 +7,7 @@ public class ScrollCamera : MonoBehaviour
 {
     public GameObject m_target;
     public float m_offsetX;
+    public float m_speed = 10;
 
     private void Update()
     {
@@ -28,12 +29,12 @@ public class ScrollCamera : MonoBehaviour
             return;
         }
 
-        var targetPos = m_target.transform.position;
-        targetPos.x += m_offsetX;
-        var translation = targetPos - transform.position;
+        var targetPos = new Vector2(m_target.transform.position.x + m_offsetX, transform.position.y);
+
+        var step = m_speed * Time.deltaTime;
+        var eyePos = Vector2.MoveTowards((Vector2)transform.position, targetPos, step);
 
         // Y, Z座標は変更しない
-        translation.y = translation.z = 0;
-        transform.Translate(translation);
+        transform.position = new Vector3(eyePos.x, transform.position.y, transform.position.z);
     }
 }
