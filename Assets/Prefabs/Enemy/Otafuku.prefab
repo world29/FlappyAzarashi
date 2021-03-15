@@ -153,6 +153,8 @@ MonoBehaviour:
   m_collisionImpulseScale: 1
   m_polygonCount: 16
   m_pieceLayer: 15
+  m_piecePrefab: {fileID: 3556554333044391437, guid: 9aed550c0c7902c4287f4bbc8070dce4,
+    type: 3}
 --- !u!95 &4504297457571622808
 Animator:
   serializedVersion: 3

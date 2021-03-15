@@ -16,6 +16,8 @@ public class BreakableSprite : MonoBehaviour
     [Layer]
     public int m_pieceLayer;
 
+    public GameObject m_piecePrefab;
+
     SpriteRenderer m_spriteRenderer;
     List<GameObject> m_pieces = new List<GameObject>();
 
@@ -38,11 +40,11 @@ public class BreakableSprite : MonoBehaviour
             var sprite = GenerateSpritePiece(m_spriteRenderer.sprite, regions[i]);
 
             // 子オブジェクトとして生成
-            var go = new GameObject("piece");
+            var go = GameObject.Instantiate(m_piecePrefab);
             go.layer = m_pieceLayer;
 
             // コンポーネントの設定
-            var sr = go.AddComponent<SpriteRenderer>();
+            var sr = go.GetComponent<SpriteRenderer>();
             sr.sprite = sprite;
 
             // ピボット位置を原点として配置されるため、補正する
