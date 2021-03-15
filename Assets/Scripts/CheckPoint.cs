@@ -14,6 +14,7 @@ public class CheckPoint : MonoBehaviour
 
     Dictionary<GameObject, Vector3> m_propsPosition = new Dictionary<GameObject, Vector3>();
     Dictionary<Vector3, GameObject> m_enemyPrefabAndPosition = new Dictionary<Vector3, GameObject>();
+    List<GameObject> m_spawnedEnemies = new List<GameObject>();
 
     private void Start()
     {
@@ -70,6 +71,12 @@ public class CheckPoint : MonoBehaviour
             }
         }
 
+        foreach (var e in m_spawnedEnemies)
+        {
+            GameObject.Destroy(e);
+        }
+        m_spawnedEnemies.Clear();
+
         foreach (var entry in m_enemyPrefabAndPosition)
         {
             var pos = entry.Key;
@@ -77,6 +84,8 @@ public class CheckPoint : MonoBehaviour
 
             var cloneObject = GameObject.Instantiate(obj, pos, Quaternion.identity, obj.transform.parent);
             cloneObject.GetComponent<Enemy>().Activate();
+
+            m_spawnedEnemies.Add(cloneObject);
         }
     }
 }
