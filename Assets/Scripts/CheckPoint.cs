@@ -6,11 +6,14 @@ using UnityEngine;
 public class CheckPoint : MonoBehaviour
 {
     public AudioClip m_sound;
+    public GameObject[] m_enemies;
 
     AudioSource m_audioSource;
     GameController m_gameController;
+    bool m_saved = false;
 
     Dictionary<GameObject, Vector3> m_propsPosition = new Dictionary<GameObject, Vector3>();
+    Dictionary<Vector3, GameObject> m_enemyPrefabAndPosition = new Dictionary<Vector3, GameObject>();
 
     private void Start()
     {
@@ -20,13 +23,20 @@ public class CheckPoint : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (!enabled) return;
+        if (m_saved) return;
 
         FlashEffect.Play();
 
         m_audioSource.PlayOneShot(m_sound);
 
         m_gameController.SetRespawnPoint(this);
+
+        SpawnEnemies();
+    }
+
+    public void SetSaved()
+    {
+        m_saved = true;
     }
 
     public void SavePropsPosition()
@@ -46,6 +56,27 @@ public class CheckPoint : MonoBehaviour
             var pos = entry.Value;
 
             obj.transform.position = pos;
+        }
+    }
+
+    public void SpawnEnemies()
+    {
+        // 初回呼び出しの際に登録されたオブジェクトをオリジナルとして登録する
+        if (m_enemyPrefabAndPosition.Count < m_enemies.Length)
+        {
+            foreach (var e in m_enemies)
+            {
+                m_enemyPrefabAndPosition.Add(e.transform.position, e);
+            }
+        }
+
+        foreach (var entry in m_enemyPrefabAndPosition)
+        {
+            var pos = entry.Key;
+            var obj = entry.Value;
+
+            var cloneObject = GameObject.Instantiate(obj, pos, Quaternion.identity, obj.transform.parent);
+            cloneObject.GetComponent<Enemy>().Activate();
         }
     }
 }

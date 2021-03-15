@@ -85,8 +85,9 @@ public class GameController : MonoBehaviour
             azarashi.transform.position = m_checkPoint.transform.position;
 
             m_checkPoint.RestorePropsPosition();
+            m_checkPoint.SpawnEnemies();
 
-            m_checkPoint.enabled = false;
+            m_checkPoint.SetSaved();
         }
 
         Intro();

@@ -9,17 +9,18 @@ public class Enemy : MonoBehaviour
     public float m_lookatRotationLimit = 30;
     public float m_lookatRotationSpeed = 10;
 
-    GameObject gameController;
+    bool m_active = false;
     GameObject m_player;
 
-    void Start()
+    private void Awake()
     {
-        gameController = GameObject.FindWithTag("GameController");
-        m_player = GameObject.FindWithTag("Player");
+        gameObject.SetActive(m_active);
     }
 
     private void Update()
     {
+        if (!m_active) return;
+
         // プレイヤーのほうを向く
         if (m_lookatPlayer)
         {
@@ -54,6 +55,22 @@ public class Enemy : MonoBehaviour
         }
 
         gameObject.SetActive(false);
+    }
+
+    public void Activate()
+    {
+        m_active = true;
+
+        m_player = GameObject.FindWithTag("Player");
+
+        gameObject.SetActive(m_active);
+    }
+
+    public void Deactivate()
+    {
+        m_active = false;
+
+        gameObject.SetActive(m_active);
     }
 
 #if DEBUG
