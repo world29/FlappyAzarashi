@@ -25,21 +25,10 @@ public class GameController : MonoBehaviour
     public Text scoreText;
     public Text stateText;
     public Fade m_fade;
-    public GameObject m_menuOnDeath;
     public GameInput gameInput;
-    public AudioClip m_gameplayBGM;
-    public AudioClip m_gameOverBGM;
-    public PlayableAsset m_introDemo;
     public CheckPoint m_checkPoint;
-
-    private AudioSource m_audioSource;
-    private PlayableDirector m_playableDirector;
-
-    private void Awake()
-    {
-        m_audioSource = GetComponent<AudioSource>();
-        m_playableDirector = GetComponent<PlayableDirector>();
-    }
+    public PlayableDirector m_respawnTimeline;
+    public PlayableDirector m_deathTimeline;
 
     void Start()
     {
@@ -76,9 +65,6 @@ public class GameController : MonoBehaviour
 
     void RespawnPlayer()
     {
-        m_menuOnDeath.SetActive(false);
-        m_audioSource.Stop();
-
         if (m_checkPoint != null)
         {
             azarashi.Respawn();
@@ -103,18 +89,13 @@ public class GameController : MonoBehaviour
         scoreText.gameObject.SetActive(false);
         stateText.gameObject.SetActive(false);
 
-        // オブジェクトのバインド情報を設定してからデモを再生
-        var targetAnimator = azarashi.GetComponent<Animator>();
-        var binding = m_introDemo.outputs.First(c => c.streamName == "Animation Track");
-        m_playableDirector.SetGenericBinding(binding.sourceObject, targetAnimator);
-
-        m_playableDirector.stopped += OnStoppedIntroDemo;
-        m_playableDirector.Play(m_introDemo);
+        m_respawnTimeline.stopped += OnStoppedRespawnTimeline;
+        m_respawnTimeline.Play();
     }
 
-    void OnStoppedIntroDemo(PlayableDirector playableDirector)
+    void OnStoppedRespawnTimeline(PlayableDirector playableDirector)
     {
-        playableDirector.stopped -= OnStoppedIntroDemo;
+        playableDirector.stopped -= OnStoppedRespawnTimeline;
 
         Ready();
     }
@@ -142,10 +123,6 @@ public class GameController : MonoBehaviour
         stateText.gameObject.SetActive(false);
         stateText.text = "";
 
-        m_audioSource.clip = m_gameplayBGM;
-        m_audioSource.loop = true;
-        m_audioSource.Play();
-
         StartParallaxScroll();
     }
 
@@ -153,13 +130,14 @@ public class GameController : MonoBehaviour
     {
         state = State.Death;
 
-        m_menuOnDeath.SetActive(true);
-
-        m_audioSource.clip = m_gameOverBGM;
-        m_audioSource.loop = false;
-        m_audioSource.Play();
-
         StopScroll();
+        m_deathTimeline.Play();
+        m_deathTimeline.stopped += OnStoppedDeathTimeline;
+    }
+
+    void OnStoppedDeathTimeline(PlayableDirector playableDirector)
+    {
+        playableDirector.stopped -= OnStoppedDeathTimeline;
     }
 
     void GameOver()
@@ -168,10 +146,6 @@ public class GameController : MonoBehaviour
 
         stateText.gameObject.SetActive(true);
         stateText.text = "GameOver";
-
-        m_audioSource.clip = m_gameOverBGM;
-        m_audioSource.loop = false;
-        m_audioSource.Play();
 
         StopScroll();
     }
