@@ -20,7 +20,7 @@ public class GameController : MonoBehaviour
     }
 
     State state;
-    int score;
+    int score = 0;
 
     public PlayerController azarashi;
     public Text scoreText;
