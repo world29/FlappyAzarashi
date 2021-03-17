@@ -23,7 +23,7 @@ public class GameController : MonoBehaviour
 
     public PlayerController azarashi;
     public Text scoreText;
-    public Text stateText;
+    public Text m_readyText;
     public Fade m_fade;
     public GameInput gameInput;
     public CheckPoint m_checkPoint;
@@ -87,7 +87,6 @@ public class GameController : MonoBehaviour
 
         azarashi.SetSteerActive(false);
         scoreText.gameObject.SetActive(false);
-        stateText.gameObject.SetActive(false);
 
         m_respawnTimeline.stopped += OnStoppedRespawnTimeline;
         m_respawnTimeline.Play();
@@ -106,9 +105,6 @@ public class GameController : MonoBehaviour
 
         scoreText.text = "Score : " + 0;
 
-        stateText.gameObject.SetActive(true);
-        stateText.text = "Ready";
-
         StartDummyScroll();
     }
 
@@ -116,12 +112,10 @@ public class GameController : MonoBehaviour
     {
         state = State.Play;
 
+        m_readyText.gameObject.SetActive(false);
         azarashi.SetSteerActive(true);
 
         azarashi.Flap();
-
-        stateText.gameObject.SetActive(false);
-        stateText.text = "";
 
         StartParallaxScroll();
     }
@@ -144,9 +138,6 @@ public class GameController : MonoBehaviour
     {
         state = State.GameOver;
 
-        stateText.gameObject.SetActive(true);
-        stateText.text = "GameOver";
-
         StopScroll();
     }
 
@@ -161,9 +152,6 @@ public class GameController : MonoBehaviour
         state = State.GameClear;
 
         azarashi.SetSteerActive(false);
-
-        stateText.gameObject.SetActive(true);
-        stateText.text = "Stage Clear";
 
         m_fade.FadeIn(3, () => {
             Reload();
