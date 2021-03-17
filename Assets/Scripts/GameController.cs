@@ -10,6 +10,7 @@ public class GameController : MonoBehaviour
 {
     enum State
     {
+        Title, // タイトル
         Intro, // プレイヤーの登場
         Ready, // プレイ開始可能
         Play,
@@ -32,18 +33,22 @@ public class GameController : MonoBehaviour
 
     void Start()
     {
+        azarashi.SetSteerActive(false);
+
         if (m_checkPoint != null)
         {
             m_checkPoint.SavePropsPosition();
         }
 
-        RespawnPlayer();
+        state = State.Title;
     }
 
     void LateUpdate()
     {
         switch (state)
         {
+            case State.Title:
+                break;
             case State.Ready:
                 if (gameInput.GetButtonDown(GameInput.ButtonType.Main)) GameStart();
                 break;
@@ -86,7 +91,6 @@ public class GameController : MonoBehaviour
         StopScroll();
 
         azarashi.SetSteerActive(false);
-        scoreText.gameObject.SetActive(false);
 
         m_respawnTimeline.stopped += OnStoppedRespawnTimeline;
         m_respawnTimeline.Play();
@@ -145,6 +149,11 @@ public class GameController : MonoBehaviour
     {
         string currentSceneName = SceneManager.GetActiveScene().name;
         SceneManager.LoadScene(currentSceneName);
+    }
+
+    public void StartGameplay()
+    {
+        RespawnPlayer();
     }
 
     public void GameClear()
