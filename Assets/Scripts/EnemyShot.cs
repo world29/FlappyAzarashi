@@ -15,8 +15,6 @@ public class EnemyShot : MonoBehaviour
     void Start()
     {
         m_player = GameObject.FindWithTag("Player");
-
-        StartCoroutine(ShotCoroutine());
     }
 
     bool IsInCamera(Camera camera)
@@ -44,24 +42,6 @@ public class EnemyShot : MonoBehaviour
 
         var rb = GameObject.Instantiate(m_bulletObject, transform.position, transform.rotation);
         rb.AddForce(shotDirection * m_shotForce, ForceMode2D.Impulse);
-    }
-
-    IEnumerator ShotCoroutine()
-    {
-        float t = 0;
-
-        while (true)
-        {
-            t += Time.deltaTime;
-
-            if (t > m_shotInterval)
-            {
-                m_animator.SetTrigger("shot");
-                t = 0;
-            }
-
-            yield return new WaitForEndOfFrame();
-        }
     }
 
     private void OnDrawGizmos()

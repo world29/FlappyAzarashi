@@ -60,6 +60,15 @@ public class CheckPoint : MonoBehaviour
         }
     }
 
+    public void DestroyEnemies()
+    {
+        foreach (var e in m_spawnedEnemies)
+        {
+            GameObject.Destroy(e);
+        }
+        m_spawnedEnemies.Clear();
+    }
+
     public void SpawnEnemies()
     {
         // 初回呼び出しの際に登録されたオブジェクトをオリジナルとして登録する
@@ -71,11 +80,7 @@ public class CheckPoint : MonoBehaviour
             }
         }
 
-        foreach (var e in m_spawnedEnemies)
-        {
-            GameObject.Destroy(e);
-        }
-        m_spawnedEnemies.Clear();
+        DestroyEnemies();
 
         foreach (var entry in m_enemyPrefabAndPosition)
         {
@@ -83,7 +88,13 @@ public class CheckPoint : MonoBehaviour
             var obj = entry.Value;
 
             var cloneObject = GameObject.Instantiate(obj, pos, Quaternion.identity, obj.transform.parent);
-            cloneObject.GetComponent<Enemy>().Activate();
+
+            // 階層のオブジェクトがアクティブかどうかにかかわらず、コンポーネントを取得する
+            var components = cloneObject.GetComponentsInChildren<Enemy>(true);
+            if (components.Length > 0)
+            {
+                components[0].Activate();
+            }
 
             m_spawnedEnemies.Add(cloneObject);
         }

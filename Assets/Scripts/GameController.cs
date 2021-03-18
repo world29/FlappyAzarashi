@@ -11,10 +11,11 @@ public class GameController : MonoBehaviour
     enum State
     {
         Title, // タイトル
-        Intro, // プレイヤーの登場
-        Ready, // プレイ開始可能
-        Play,
-        Death, // プレイヤー死亡。コンティニュー可能。
+        Intro, // タイトルとゲームプレイをつなぐデモ
+        Gameplay_Spawn, // プレイヤースポーン
+        Gameplay_Ready, // プレイ開始可能
+        Gameplay_Play,
+        Gameplay_Death, // プレイヤー死亡。コンティニュー可能。
         GameOver,
         GameClear,
     }
@@ -49,13 +50,13 @@ public class GameController : MonoBehaviour
         {
             case State.Title:
                 break;
-            case State.Ready:
+            case State.Gameplay_Ready:
                 if (gameInput.GetButtonDown(GameInput.ButtonType.Main)) GameStart();
                 break;
-            case State.Play:
+            case State.Gameplay_Play:
                 if (azarashi.IsDead()) Death();
                 break;
-            case State.Death:
+            case State.Gameplay_Death:
                 break;
             case State.GameOver:
                 if (gameInput.GetButtonDown(GameInput.ButtonType.Main)) Reload();
@@ -68,29 +69,21 @@ public class GameController : MonoBehaviour
         }
     }
 
+    //todo: Gameplay_Start
     void RespawnPlayer()
     {
+        state = State.Gameplay_Spawn;
+
         if (m_checkPoint != null)
         {
-            azarashi.Respawn();
-            azarashi.transform.position = m_checkPoint.transform.position;
-
-            m_checkPoint.RestorePropsPosition();
-            m_checkPoint.SpawnEnemies();
-
-            m_checkPoint.SetSaved();
+            m_checkPoint.DestroyEnemies();
         }
 
-        Intro();
-    }
-
-    void Intro()
-    {
-        state = State.Intro;
+        azarashi.Respawn();
+        azarashi.SetSteerActive(false);
+        azarashi.transform.position = m_checkPoint.transform.position;
 
         StopScroll();
-
-        azarashi.SetSteerActive(false);
 
         m_respawnTimeline.stopped += OnStoppedRespawnTimeline;
         m_respawnTimeline.Play();
@@ -105,16 +98,24 @@ public class GameController : MonoBehaviour
 
     void Ready()
     {
-        state = State.Ready;
+        state = State.Gameplay_Ready;
 
         scoreText.text = "Score : " + 0;
+
+        if (m_checkPoint != null)
+        {
+            m_checkPoint.RestorePropsPosition();
+            m_checkPoint.SpawnEnemies();
+
+            m_checkPoint.SetSaved();
+        }
 
         StartDummyScroll();
     }
 
     void GameStart()
     {
-        state = State.Play;
+        state = State.Gameplay_Play;
 
         m_readyText.gameObject.SetActive(false);
         azarashi.SetSteerActive(true);
@@ -126,7 +127,7 @@ public class GameController : MonoBehaviour
 
     void Death()
     {
-        state = State.Death;
+        state = State.Gameplay_Death;
 
         StopScroll();
         m_deathTimeline.Play();

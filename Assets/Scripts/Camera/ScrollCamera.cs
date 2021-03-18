@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[ExecuteInEditMode]
 public class ScrollCamera : MonoBehaviour
 {
     public GameObject m_target;

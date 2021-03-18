@@ -6,24 +6,34 @@ public class BezierMoving : MonoBehaviour
 {
     public Transform[] m_controlPoints;
 
-    public bool m_loop = true;
-    public float m_speed = 1.0f;
-
-    private Coroutine m_coroutine;
+    [Range(0, 1)]
+    public float m_time = 0;
 
     private void Update()
     {
-        if (m_coroutine == null)
-        {
-            m_coroutine = StartCoroutine(MoveCoroutine());
-        }
+        // Animator で制御されるパラメータ[t]をもとに位置を更新する
+        UpdatePositionByTime(m_time);
     }
 
-    private void OnDestroy()
+    void UpdatePositionByTime(float t)
     {
-        if (m_coroutine != null)
+        t = Mathf.Clamp01(t);
+
+        int segments = m_controlPoints.Length / 3;
+        float time_per_segment = 1.0f / segments;
+
+        // current segment
+        int s = Mathf.FloorToInt(t / time_per_segment);
+        float time_in_segment = (t % time_per_segment) / time_per_segment;
+
+        if (s < segments)
         {
-            StopCoroutine(m_coroutine);
+            transform.position = CalculateBezier(
+                m_controlPoints[s * 3 + 0].position,
+                m_controlPoints[s * 3 + 1].position,
+                m_controlPoints[s * 3 + 2].position,
+                m_controlPoints[s * 3 + 3].position,
+                time_in_segment);
         }
     }
 
@@ -39,7 +49,7 @@ public class BezierMoving : MonoBehaviour
 
             while (t < 1.0f)
             {
-                t += Time.deltaTime * m_speed;
+                t += Time.deltaTime;
 
                 Vector3[] p = {
                     m_controlPoints[s + 0].position,
@@ -55,9 +65,9 @@ public class BezierMoving : MonoBehaviour
 
             s += 3;
 
-            if (s >= (m_controlPoints.Length - 3) && m_loop)
+            if (s >= (m_controlPoints.Length - 3))
             {
-                s = 0;
+                break;
             }
         }
     }
