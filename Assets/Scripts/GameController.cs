@@ -77,6 +77,7 @@ public class GameController : MonoBehaviour
         if (m_checkPoint != null)
         {
             m_checkPoint.DestroyEnemies();
+            m_checkPoint.RestorePropsPosition();
         }
 
         azarashi.Respawn();
@@ -104,7 +105,6 @@ public class GameController : MonoBehaviour
 
         if (m_checkPoint != null)
         {
-            m_checkPoint.RestorePropsPosition();
             m_checkPoint.SpawnEnemies();
 
             m_checkPoint.SetSaved();
