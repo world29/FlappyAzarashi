@@ -27,10 +27,17 @@ public class GameController : MonoBehaviour
     public Text scoreText;
     public Text m_readyText;
     public Fade m_fade;
-    public GameInput gameInput;
     public CheckPoint m_checkPoint;
     public PlayableDirector m_respawnTimeline;
     public PlayableDirector m_deathTimeline;
+
+    public InputActionScriptableObject m_ok;
+
+    class InputState
+    {
+        public bool OK = false;
+    }
+    InputState m_input = new InputState();
 
     void Start()
     {
@@ -44,6 +51,21 @@ public class GameController : MonoBehaviour
         state = State.Title;
     }
 
+    private void Update()
+    {
+        UpdateInput();
+    }
+
+    void UpdateInput()
+    {
+        var inputService = ServiceLocator.Resolve<IInputActionState>();
+
+        // 入力状態をリセット
+        m_input = new InputState();
+
+        m_input.OK = inputService.IsAcitonEnter(m_ok.ActionName);
+    }
+
     void LateUpdate()
     {
         switch (state)
@@ -51,7 +73,7 @@ public class GameController : MonoBehaviour
             case State.Title:
                 break;
             case State.Gameplay_Ready:
-                if (gameInput.GetButtonDown(GameInput.ButtonType.Main)) GameStart();
+                if (m_input.OK) GameStart();
                 break;
             case State.Gameplay_Play:
                 if (azarashi.IsDead()) Death();
@@ -59,10 +81,10 @@ public class GameController : MonoBehaviour
             case State.Gameplay_Death:
                 break;
             case State.GameOver:
-                if (gameInput.GetButtonDown(GameInput.ButtonType.Main)) Reload();
+                if (m_input.OK) Reload();
                 break;
             case State.GameClear:
-                if (gameInput.GetButtonDown(GameInput.ButtonType.Main)) Reload();
+                if (m_input.OK) Reload();
                 break;
             default:
                 break;
@@ -101,7 +123,7 @@ public class GameController : MonoBehaviour
     {
         state = State.Gameplay_Ready;
 
-        scoreText.text = "Score : " + 0;
+        //scoreText.text = "Score : " + 0;
 
         if (m_checkPoint != null)
         {
@@ -117,7 +139,7 @@ public class GameController : MonoBehaviour
     {
         state = State.Gameplay_Play;
 
-        m_readyText.gameObject.SetActive(false);
+        //m_readyText.gameObject.SetActive(false);
         azarashi.SetSteerActive(true);
 
         azarashi.Flap();
@@ -171,7 +193,7 @@ public class GameController : MonoBehaviour
     public void IncreaseScore()
     {
         score++;
-        scoreText.text = "Score : " + score;
+        //scoreText.text = "Score : " + score;
     }
 
     public void StartDummyScroll()

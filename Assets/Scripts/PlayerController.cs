@@ -13,7 +13,9 @@ public class PlayerController : MonoBehaviour
 
     Coroutine m_runningDashCoroutine;
 
-    public GameInput gameInput;
+    public InputActionScriptableObject m_jump;
+    public InputActionScriptableObject m_dash;
+
     public float maxHeight;
     public float m_speed = 1;
     public float m_dashSpeed = 2;
@@ -61,12 +63,14 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        if (gameInput.GetButtonDown(GameInput.ButtonType.Main) && transform.position.y < maxHeight)
+        var inputService = ServiceLocator.Resolve<IInputActionState>();
+
+        if (inputService.IsAcitonEnter(m_jump.ActionName) && transform.position.y < maxHeight)
         {
             Flap();
         }
 
-        if (gameInput.GetButtonDown(GameInput.ButtonType.Sub))
+        if (inputService.IsAcitonEnter(m_dash.ActionName))
         {
             Dash();
         }

@@ -74,7 +74,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f5d446f73084204b9b40323864d497a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameInput: {fileID: 0}
+  m_jump: {fileID: 11400000, guid: bf49f5f5ee93f6141a394f99ee62d8b5, type: 2}
+  m_dash: {fileID: 11400000, guid: e5df2dbe66e3b9141ab0a1bb9f9ea756, type: 2}
   maxHeight: 12
   m_speed: 2
   m_dashSpeed: 7
