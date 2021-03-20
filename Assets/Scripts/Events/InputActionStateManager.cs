@@ -9,7 +9,17 @@ public class InputActionStateManager : MonoBehaviour, IInputActionEventHandler, 
     // IInputActionEventHandler
     public void OnActionEnter(InputActionScriptableObject inputAction)
     {
-        m_actionStateDict[inputAction.ActionName].isEnter = true;
+        if (m_actionStateDict.ContainsKey(inputAction.ActionName))
+        {
+            m_actionStateDict[inputAction.ActionName].isEnter = true;
+        }
+        else
+        {
+            var actionState = new InputActionState();
+            actionState.isEnter = true;
+
+            m_actionStateDict.Add(inputAction.ActionName, actionState);
+        }
     }
 
     // IInputActionState
