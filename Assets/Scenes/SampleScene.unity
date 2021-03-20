@@ -1367,7 +1367,7 @@ PrefabInstance:
     - target: {fileID: 8469360565102901272, guid: 84315beaab8b9bc43a8bdd3b0afbd002,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 169.83
+      value: 231.3
       objectReference: {fileID: 0}
     - target: {fileID: 8469360565102901272, guid: 84315beaab8b9bc43a8bdd3b0afbd002,
         type: 3}
@@ -2166,7 +2166,7 @@ PrefabInstance:
     - target: {fileID: 8469360565102901272, guid: 84315beaab8b9bc43a8bdd3b0afbd002,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 175.04001
+      value: 242.70001
       objectReference: {fileID: 0}
     - target: {fileID: 8469360565102901272, guid: 84315beaab8b9bc43a8bdd3b0afbd002,
         type: 3}
@@ -2516,7 +2516,7 @@ PrefabInstance:
     - target: {fileID: 8469360565102901272, guid: 84315beaab8b9bc43a8bdd3b0afbd002,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 164.53
+      value: 220.1
       objectReference: {fileID: 0}
     - target: {fileID: 8469360565102901272, guid: 84315beaab8b9bc43a8bdd3b0afbd002,
         type: 3}
@@ -3576,6 +3576,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2110906782}
     m_Modifications:
+    - target: {fileID: 6647092536751943360, guid: 1356a922ed61f2347bf230b1cba5eed2,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6647092536751943360, guid: 1356a922ed61f2347bf230b1cba5eed2,
         type: 3}
       propertyPath: m_targetCamera

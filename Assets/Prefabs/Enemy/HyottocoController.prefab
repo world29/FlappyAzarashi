@@ -334,54 +334,6 @@ Transform:
   m_Father: {fileID: 6647092537095332499}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &6647092537655230364
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 542953061907595532}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 172f190bac0f00f4a95b1f254090f704, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_controlPoints:
-  - {fileID: 6647092535883773544}
-  - {fileID: 6647092537617843013}
-  - {fileID: 6647092537172045238}
-  - {fileID: 6647092536195430250}
-  - {fileID: 6647092535754740416}
-  - {fileID: 6647092537401671719}
-  - {fileID: 6647092536153877616}
-  m_time: 0
---- !u!114 &6647092537655230365
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 542953061907595532}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a8063602528fcd74994154e04f39b4c1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_interval: 10
-  m_event:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 3251594653053828449}
-        m_MethodName: SetTrigger
-        m_Mode: 5
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: bodyattack
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!1001 &6647092536796185873
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -389,6 +341,46 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6647092536751943391}
     m_Modifications:
+    - target: {fileID: 4820411695784485362, guid: 09638274912fbac4091f2cb2cad3cf84,
+        type: 3}
+      propertyPath: m_controlPoints.Array.size
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 4820411695784485362, guid: 09638274912fbac4091f2cb2cad3cf84,
+        type: 3}
+      propertyPath: m_controlPoints.Array.data[0]
+      value: 
+      objectReference: {fileID: 6647092535883773544}
+    - target: {fileID: 4820411695784485362, guid: 09638274912fbac4091f2cb2cad3cf84,
+        type: 3}
+      propertyPath: m_controlPoints.Array.data[1]
+      value: 
+      objectReference: {fileID: 6647092537617843013}
+    - target: {fileID: 4820411695784485362, guid: 09638274912fbac4091f2cb2cad3cf84,
+        type: 3}
+      propertyPath: m_controlPoints.Array.data[2]
+      value: 
+      objectReference: {fileID: 6647092537172045238}
+    - target: {fileID: 4820411695784485362, guid: 09638274912fbac4091f2cb2cad3cf84,
+        type: 3}
+      propertyPath: m_controlPoints.Array.data[3]
+      value: 
+      objectReference: {fileID: 6647092536195430250}
+    - target: {fileID: 4820411695784485362, guid: 09638274912fbac4091f2cb2cad3cf84,
+        type: 3}
+      propertyPath: m_controlPoints.Array.data[4]
+      value: 
+      objectReference: {fileID: 6647092535754740416}
+    - target: {fileID: 4820411695784485362, guid: 09638274912fbac4091f2cb2cad3cf84,
+        type: 3}
+      propertyPath: m_controlPoints.Array.data[5]
+      value: 
+      objectReference: {fileID: 6647092537401671719}
+    - target: {fileID: 4820411695784485362, guid: 09638274912fbac4091f2cb2cad3cf84,
+        type: 3}
+      propertyPath: m_controlPoints.Array.data[6]
+      value: 
+      objectReference: {fileID: 6647092536153877616}
     - target: {fileID: 6608966066466292765, guid: 09638274912fbac4091f2cb2cad3cf84,
         type: 3}
       propertyPath: m_Name
@@ -451,12 +443,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 09638274912fbac4091f2cb2cad3cf84, type: 3}
---- !u!1 &542953061907595532 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6608966066466292765, guid: 09638274912fbac4091f2cb2cad3cf84,
-    type: 3}
-  m_PrefabInstance: {fileID: 6647092536796185873}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &542953061907595535 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6608966066466292766, guid: 09638274912fbac4091f2cb2cad3cf84,
