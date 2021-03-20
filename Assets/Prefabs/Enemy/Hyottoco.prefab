@@ -18,6 +18,7 @@ GameObject:
   - component: {fileID: 4820411695784485362}
   - component: {fileID: 2346935564636326535}
   - component: {fileID: 3302913762937990702}
+  - component: {fileID: 2234436811565896420}
   m_Layer: 8
   m_Name: Hyottoco
   m_TagString: Untagged
@@ -245,6 +246,33 @@ MonoBehaviour:
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: escape
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &2234436811565896420
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6608966066466292765}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a8063602528fcd74994154e04f39b4c1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_interval: 2
+  m_event:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 8151738982677756016}
+        m_MethodName: SetTrigger
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: shot
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!1 &8018418219739700991
