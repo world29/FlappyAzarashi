@@ -38,4 +38,15 @@ public class EnemyHyottocoController : MonoBehaviour
             m_onConstraintActivated.Invoke();
         }
     }
+
+    private void OnDrawGizmos()
+    {
+        var camera = m_targetCamera ? m_targetCamera : Camera.main;
+
+        float aspectRatio = (float)Screen.currentResolution.width / Screen.currentResolution.height;
+        var verticalSize = camera.orthographicSize * 2;
+
+        Gizmos.color = new Color(1, 1, 1, 0.2f);
+        Gizmos.DrawCube(transform.position, new Vector3(verticalSize / aspectRatio, verticalSize, 1));
+    }
 }
