@@ -258,7 +258,7 @@ public class PlayerController : MonoBehaviour
         m_audioSource.clip = m_breakSound;
         m_audioSource.Play();
 
-        m_spriteRenderer.enabled = false;
+        m_spriteRenderer.color = new Color(0, 0, 0, 0);
         m_animator.enabled = false;
         var colliders = GetComponentsInChildren<Collider2D>();
         foreach (var collider in colliders)
@@ -291,5 +291,18 @@ public class PlayerController : MonoBehaviour
     public void Respawn()
     {
         isDead = false;
+
+        m_spriteRenderer.color = Color.white;
+
+        m_animator.enabled = true;
+        var colliders = GetComponentsInChildren<Collider2D>(true);
+        foreach (var collider in colliders)
+        {
+            collider.enabled = true;
+        }
+
+        GetComponent<Rigidbody2D>().simulated = true;
+
+        GetComponentInChildren<BreakableSprite>().InitializePieces();
     }
 }

@@ -20,52 +20,16 @@ public class BreakableSprite : MonoBehaviour
 
     SpriteRenderer m_spriteRenderer;
     List<GameObject> m_pieces = new List<GameObject>();
+    List<GameObject> m_brokenPieces = new List<GameObject>();
 
     private void Start()
     {
-        // 事前に破壊されたスプライトを生成し、親子付けしておく
-        m_spriteRenderer = GetComponent<SpriteRenderer>();
-
-        // フリップは非対応
-        Debug.Assert(m_spriteRenderer.flipX == false && m_spriteRenderer.flipY == false);
-
-        // ボロノイ領域の生成
-        var voronoi = ComputeRandomVoronoi(m_polygonCount, m_spriteRenderer.sprite.rect);
-
-        // 破片スプライトの作成
-        var regions = voronoi.Regions();
-
-        for (int i = 0; i < regions.Count; i++)
-        {
-            var sprite = GenerateSpritePiece(m_spriteRenderer.sprite, regions[i]);
-
-            // 子オブジェクトとして生成
-            var go = GameObject.Instantiate(m_piecePrefab);
-            go.layer = m_pieceLayer;
-
-            // コンポーネントの設定
-            var sr = go.GetComponent<SpriteRenderer>();
-            sr.sprite = sprite;
-
-            // ピボット位置を原点として配置されるため、補正する
-            float offsetX = sprite.pivot.x / sprite.pixelsPerUnit - sprite.bounds.extents.x;
-            float offsetY = sprite.pivot.y / sprite.pixelsPerUnit - sprite.bounds.extents.y;
-            go.transform.position = transform.position + new Vector3(offsetX, offsetY);
-            go.transform.parent = transform;
-
-            go.AddComponent<PolygonCollider2D>(); // Sprite の物理形状を元にコライダを生成する
-            var rb = go.AddComponent<Rigidbody2D>();
-            rb.useAutoMass = true;
-
-            go.SetActive(false);
-
-            m_pieces.Add(go);
-        }
+        InitializePieces();
     }
 
     private void OnDestroy()
     {
-        foreach (var obj in m_pieces)
+        foreach (var obj in m_brokenPieces)
         {
             Destroy(obj);
         }
@@ -163,9 +127,60 @@ public class BreakableSprite : MonoBehaviour
                 Debug.DrawLine(contactPoint, contactPoint + force, Color.cyan, 5);
                 rb.AddForce(force, ForceMode2D.Impulse);
             }
+
+            m_brokenPieces.Add(go);
         }
 
+        m_pieces.Clear();
+
         yield return null;
+    }
+
+    public void InitializePieces()
+    {
+        if (m_pieces.Count > 0)
+        {
+            return;
+        }
+
+        // 事前に破壊されたスプライトを生成し、親子付けしておく
+        m_spriteRenderer = GetComponent<SpriteRenderer>();
+
+        // フリップは非対応
+        Debug.Assert(m_spriteRenderer.flipX == false && m_spriteRenderer.flipY == false);
+
+        // ボロノイ領域の生成
+        var voronoi = ComputeRandomVoronoi(m_polygonCount, m_spriteRenderer.sprite.rect);
+
+        // 破片スプライトの作成
+        var regions = voronoi.Regions();
+
+        for (int i = 0; i < regions.Count; i++)
+        {
+            var sprite = GenerateSpritePiece(m_spriteRenderer.sprite, regions[i]);
+
+            // 子オブジェクトとして生成
+            var go = GameObject.Instantiate(m_piecePrefab);
+            go.layer = m_pieceLayer;
+
+            // コンポーネントの設定
+            var sr = go.GetComponent<SpriteRenderer>();
+            sr.sprite = sprite;
+
+            // ピボット位置を原点として配置されるため、補正する
+            float offsetX = sprite.pivot.x / sprite.pixelsPerUnit - sprite.bounds.extents.x;
+            float offsetY = sprite.pivot.y / sprite.pixelsPerUnit - sprite.bounds.extents.y;
+            go.transform.position = transform.position + new Vector3(offsetX, offsetY);
+            go.transform.parent = transform;
+
+            go.AddComponent<PolygonCollider2D>(); // Sprite の物理形状を元にコライダを生成する
+            var rb = go.AddComponent<Rigidbody2D>();
+            rb.useAutoMass = true;
+
+            go.SetActive(false);
+
+            m_pieces.Add(go);
+        }
     }
 
     public void BreakSprite(Vector2 contactPoint)

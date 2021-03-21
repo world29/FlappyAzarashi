@@ -325,7 +325,7 @@ MonoBehaviour:
   m_collisionImpulseScale: 1
   m_polygonCount: 10
   m_pieceLayer: 15
-  m_piecePrefab: {fileID: 3556554333044391437, guid: 9aed550c0c7902c4287f4bbc8070dce4,
+  m_piecePrefab: {fileID: 2202719057381268667, guid: c735d4af971b2824a981cbbef0fc020b,
     type: 3}
 --- !u!1 &1176168513845184533
 GameObject:
