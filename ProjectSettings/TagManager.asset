@@ -28,7 +28,7 @@ TagManager:
   - PlayerShot
   - CheckPoint
   - EnemyDetection
-  - 
+  - PlayerTrigger
   - 
   - 
   - 

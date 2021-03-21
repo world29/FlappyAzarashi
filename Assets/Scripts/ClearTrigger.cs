@@ -13,11 +13,6 @@ public class ClearTrigger : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (!collision.transform.CompareTag("Player"))
-        {
-            return;
-        }
-
         gameController.SendMessage("IncreaseScore");
     }
 }
