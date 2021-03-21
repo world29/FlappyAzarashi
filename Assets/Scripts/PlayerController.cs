@@ -35,7 +35,6 @@ public class PlayerController : MonoBehaviour
 
     public GameObject sprite;
     public AudioClip m_dashSound;
-    public AudioClip m_dashHitSound;
 
     public bool IsDead()
     {
@@ -224,7 +223,6 @@ public class PlayerController : MonoBehaviour
         OnEndDash(true);
 
         // ヒット時の演出
-        m_audioSource.PlayOneShot(m_dashHitSound);
         if (m_dashHitCameraShake)
         {
             Camera.main.SendMessage("Shake");

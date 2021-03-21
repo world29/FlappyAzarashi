@@ -15,7 +15,7 @@ TagManager:
   - UI
   - 
   - 
-  - Enemy
+  - EnemyAttack
   - EnemyShot
   - Obstacle
   - Item
@@ -29,7 +29,7 @@ TagManager:
   - CheckPoint
   - EnemyDetection
   - PlayerTrigger
-  - 
+  - EnemyDamage
   - 
   - 
   - 
