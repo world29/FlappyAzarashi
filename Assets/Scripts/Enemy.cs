@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -82,26 +82,4 @@ public class Enemy : MonoBehaviour
             m_shotAbility.gameObject.SendMessage("Shot");
         }
     }
-
-#if DEBUG
-    private void OnDrawGizmos()
-    {
-        var handlePos = transform.position;
-
-        UnityEditor.Handles.color = new Color(1, 0, 0, 0.2f);
-        UnityEditor.Handles.DrawSolidArc(
-            handlePos,
-            Vector3.back,
-            Vector3.left,
-            m_lookatRotationLimit,
-            UnityEditor.HandleUtility.GetHandleSize(handlePos));
-
-        UnityEditor.Handles.DrawSolidArc(
-            handlePos,
-            Vector3.back,
-            Vector3.left,
-            -m_lookatRotationLimit,
-            UnityEditor.HandleUtility.GetHandleSize(handlePos));
-    }
-#endif
 }
