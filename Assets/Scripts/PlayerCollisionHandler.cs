@@ -50,7 +50,7 @@ public class PlayerCollisionHandler : MonoBehaviour
         {
             case CollisionHandlerType.Obstacle:
             case CollisionHandlerType.Damage:
-                player.Clash();
+                player.Clash(collision);
                 break;
             case CollisionHandlerType.DashAttack:
                 player.HitBack(collision);

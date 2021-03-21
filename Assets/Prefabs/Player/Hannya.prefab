@@ -93,7 +93,7 @@ MonoBehaviour:
   m_dashTrailColor: {r: 1, g: 0, b: 0, a: 1}
   sprite: {fileID: 492067596778591045}
   m_dashSound: {fileID: 8300000, guid: 69d6833d9d32b2d40ba972e697af118c, type: 3}
-  m_dashHitSound: {fileID: 8300000, guid: c00c227581eceef4abd43e5f6d31a0ca, type: 3}
+  m_breakSound: {fileID: 8300000, guid: c00c227581eceef4abd43e5f6d31a0ca, type: 3}
 --- !u!114 &4376747664458732281
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -237,6 +237,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2604186811226292830}
   - component: {fileID: 8353916026117952764}
+  - component: {fileID: 1859619423891398289}
   m_Layer: 0
   m_Name: HannyaSprite
   m_TagString: Untagged
@@ -309,6 +310,23 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &1859619423891398289
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 492067596778591045}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1feded38c39656d4fa0a62fa9d0493a6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_collisionImpulseScale: 1
+  m_polygonCount: 10
+  m_pieceLayer: 15
+  m_piecePrefab: {fileID: 3556554333044391437, guid: 9aed550c0c7902c4287f4bbc8070dce4,
+    type: 3}
 --- !u!1 &1176168513845184533
 GameObject:
   m_ObjectHideFlags: 0

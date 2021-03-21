@@ -10,6 +10,8 @@ public class PlayerController : MonoBehaviour
     SpriteTrailRenderer m_trailRenderer;
     AudioSource m_audioSource;
     GameObject m_gameController;
+    SpriteRenderer m_spriteRenderer;
+    Animator m_animator;
 
     Coroutine m_runningDashCoroutine;
 
@@ -35,6 +37,7 @@ public class PlayerController : MonoBehaviour
 
     public GameObject sprite;
     public AudioClip m_dashSound;
+    public AudioClip m_breakSound;
 
     public bool IsDead()
     {
@@ -51,6 +54,8 @@ public class PlayerController : MonoBehaviour
         rb2d = GetComponent<Rigidbody2D>();
         m_trailRenderer = GetComponent<SpriteTrailRenderer>();
         m_audioSource = GetComponent<AudioSource>();
+        m_spriteRenderer = GetComponentInChildren<SpriteRenderer>();
+        m_animator = GetComponent<Animator>();
     }
 
     void Start()
@@ -233,13 +238,38 @@ public class PlayerController : MonoBehaviour
         StartCoroutine(HitBackCoroutine(hit));
     }
 
-    public void Clash()
+    public void Clash(Collision2D collision)
     {
         if (isDead) return;
 
         Camera.main.SendMessage("Clash");
 
+        StartCoroutine(PlayerBreakCoroutine(collision));
+
         isDead = true;
+    }
+
+    IEnumerator PlayerBreakCoroutine(Collision2D collision)
+    {
+        var contact = collision.contacts[0];
+        m_spriteRenderer.gameObject.SendMessage("BreakSprite", contact.point, SendMessageOptions.DontRequireReceiver);
+
+        //AudioSource.PlayClipAtPoint(m_breakSound, transform.position);
+        m_audioSource.clip = m_breakSound;
+        m_audioSource.Play();
+
+        m_spriteRenderer.enabled = false;
+        m_animator.enabled = false;
+        var colliders = GetComponentsInChildren<Collider2D>();
+        foreach (var collider in colliders)
+        {
+            collider.enabled = false;
+        }
+        GetComponent<Rigidbody2D>().simulated = false;
+
+        yield return new WaitForSecondsRealtime(m_breakSound.length);
+
+        //gameObject.SetActive(false);
     }
 
     public void PickupItem(ItemType itemType)
