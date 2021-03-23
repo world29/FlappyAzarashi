@@ -94,6 +94,8 @@ MonoBehaviour:
   sprite: {fileID: 492067596778591045}
   m_dashSound: {fileID: 8300000, guid: 69d6833d9d32b2d40ba972e697af118c, type: 3}
   m_breakSound: {fileID: 8300000, guid: c00c227581eceef4abd43e5f6d31a0ca, type: 3}
+  m_breakParticle: {fileID: 7489270630588893637, guid: 4e070991a2a077c4f8b100d1741f3003,
+    type: 3}
 --- !u!114 &4376747664458732281
 MonoBehaviour:
   m_ObjectHideFlags: 0

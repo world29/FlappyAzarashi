@@ -38,6 +38,7 @@ public class PlayerController : MonoBehaviour
     public GameObject sprite;
     public AudioClip m_dashSound;
     public AudioClip m_breakSound;
+    public ParticleSystem m_breakParticle;
 
     public bool IsDead()
     {
@@ -253,6 +254,8 @@ public class PlayerController : MonoBehaviour
     {
         var contact = collision.contacts[0];
         m_spriteRenderer.gameObject.SendMessage("BreakSprite", contact.point, SendMessageOptions.DontRequireReceiver);
+
+        GameObject.Instantiate(m_breakParticle, transform.position, transform.rotation);
 
         //AudioSource.PlayClipAtPoint(m_breakSound, transform.position);
         m_audioSource.clip = m_breakSound;
