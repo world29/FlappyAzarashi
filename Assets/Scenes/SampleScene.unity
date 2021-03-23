@@ -2071,6 +2071,18 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 9200490296317199100}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1036154407 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 693549642947317359, guid: 306480c4f02b04a4faa869f8cbf3a0b1,
+    type: 3}
+  m_PrefabInstance: {fileID: 9200490296317199100}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 73979c9b96c27489aab7794c21470cbd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &1102980937 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8469360565102901272, guid: 800766bd5f77f5f41a72d3828d6620ec,
@@ -3751,6 +3763,7 @@ MonoBehaviour:
   m_checkPoint: {fileID: 824441104}
   m_respawnTimeline: {fileID: 1925442906}
   m_deathTimeline: {fileID: 1989796775}
+  m_lifeCounter: {fileID: 1036154407}
 --- !u!4 &1634945652
 Transform:
   m_ObjectHideFlags: 0

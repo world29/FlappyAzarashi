@@ -34,6 +34,8 @@ public class GameController : MonoBehaviour
 
     void Start()
     {
+        GameDataAccessor.Initialize();
+
         azarashi.SetSteerActive(false);
 
         if (m_checkPoint != null)
@@ -128,6 +130,9 @@ public class GameController : MonoBehaviour
     void Death()
     {
         state = State.Gameplay_Death;
+
+        int lifeCount = GameDataAccessor.PlayerLifeCount;
+        GameDataAccessor.PlayerLifeCount = Mathf.Max(0, lifeCount - 1);
 
         StopScroll();
         m_deathTimeline.Play();
