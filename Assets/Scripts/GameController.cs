@@ -16,7 +16,7 @@ public class GameController : MonoBehaviour
         Gameplay_Ready, // プレイ開始可能
         Gameplay_Play,
         Gameplay_Death, // プレイヤー死亡。コンティニュー可能。
-        GameOver,
+        Gameplay_GameOver, // 残機ゼロでプレイヤー死亡。
         GameClear,
     }
 
@@ -31,6 +31,7 @@ public class GameController : MonoBehaviour
     public CheckPoint m_checkPoint;
     public PlayableDirector m_respawnTimeline;
     public PlayableDirector m_deathTimeline;
+    public PlayableDirector m_gameoverTimeline;
 
     void Start()
     {
@@ -60,8 +61,7 @@ public class GameController : MonoBehaviour
                 break;
             case State.Gameplay_Death:
                 break;
-            case State.GameOver:
-                if (gameInput.GetButtonDown(GameInput.ButtonType.Main)) Reload();
+            case State.Gameplay_GameOver:
                 break;
             case State.GameClear:
                 if (gameInput.GetButtonDown(GameInput.ButtonType.Main)) Reload();
@@ -90,6 +90,13 @@ public class GameController : MonoBehaviour
 
         m_respawnTimeline.stopped += OnStoppedRespawnTimeline;
         m_respawnTimeline.Play();
+    }
+
+    public void ResetLifeAndRespawnPlayer()
+    {
+        GameDataAccessor.PlayerLifeCount = GameDataAccessor.InitialPlayerLifeCount;
+
+        RespawnPlayer();
     }
 
     void OnStoppedRespawnTimeline(PlayableDirector playableDirector)
@@ -129,26 +136,22 @@ public class GameController : MonoBehaviour
 
     void Death()
     {
-        state = State.Gameplay_Death;
+        StopScroll();
 
         int lifeCount = GameDataAccessor.PlayerLifeCount;
-        GameDataAccessor.PlayerLifeCount = Mathf.Max(0, lifeCount - 1);
 
-        StopScroll();
-        m_deathTimeline.Play();
-        m_deathTimeline.stopped += OnStoppedDeathTimeline;
-    }
+        if (lifeCount > 0) {
+            state = State.Gameplay_Death;
 
-    void OnStoppedDeathTimeline(PlayableDirector playableDirector)
-    {
-        playableDirector.stopped -= OnStoppedDeathTimeline;
-    }
+            GameDataAccessor.PlayerLifeCount = Mathf.Max(0, lifeCount - 1);
 
-    void GameOver()
-    {
-        state = State.GameOver;
+            m_deathTimeline.Play();
+        }
+        else {
+            state = State.Gameplay_GameOver;
 
-        StopScroll();
+            m_gameoverTimeline.Play();
+        }
     }
 
     void Reload()

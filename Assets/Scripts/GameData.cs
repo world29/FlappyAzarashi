@@ -26,6 +26,8 @@ public static class GameDataAccessor
 
     public static void Initialize()
     {
-        PlayerLifeCount = 3;
+        PlayerLifeCount = InitialPlayerLifeCount;
     }
+
+    public static int InitialPlayerLifeCount = 3;
 }
