@@ -176,6 +176,8 @@ public class PlayerController : MonoBehaviour
         m_trailRenderer.m_TrailTime = 0.5f;
         m_trailRenderer.SetEnabled(true);
 
+        m_animator.SetTrigger("dash");
+
         m_audioSource.PlayOneShot(m_dashSound);
     }
 
