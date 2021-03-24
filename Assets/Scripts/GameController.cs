@@ -21,10 +21,8 @@ public class GameController : MonoBehaviour
     }
 
     State state;
-    int score = 0;
 
     public PlayerController azarashi;
-    public Text scoreText;
     public Text m_readyText;
     public Fade m_fade;
     public GameInput gameInput;
@@ -110,8 +108,6 @@ public class GameController : MonoBehaviour
     {
         state = State.Gameplay_Ready;
 
-        scoreText.text = "Score : " + 0;
-
         if (m_checkPoint != null)
         {
             m_checkPoint.SpawnEnemies();
@@ -178,8 +174,11 @@ public class GameController : MonoBehaviour
 
     public void IncreaseScore()
     {
-        score++;
-        scoreText.text = "Score : " + score;
+        if (state != State.Gameplay_Play) {
+            return;
+        }
+
+        GameDataAccessor.Score++;
     }
 
     public void StartDummyScroll()

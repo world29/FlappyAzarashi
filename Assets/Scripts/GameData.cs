@@ -3,8 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class GameData {
+public class GameData
+{
     public int PlayerLifeCount;
+
+    public int Score;
 }
 
 [System.Serializable]
@@ -24,9 +27,20 @@ public static class GameDataAccessor
 
     public static UnityEventInt OnPlayerLifeCountChanged = new UnityEventInt();
 
+    public static int Score {
+        get { return s_gameData.Score; }
+        set {
+            s_gameData.Score = value;
+            OnScoreChanged.Invoke(value);
+        }
+    }
+
+    public static UnityEventInt OnScoreChanged = new UnityEventInt();
+
     public static void Initialize()
     {
         PlayerLifeCount = InitialPlayerLifeCount;
+        Score = 0;
     }
 
     public static int InitialPlayerLifeCount = 3;
