@@ -12,6 +12,7 @@ public class PlayerController : MonoBehaviour
     GameObject m_gameController;
     SpriteRenderer m_spriteRenderer;
     Animator m_animator;
+    PlayerAction m_input;
 
     Coroutine m_runningDashCoroutine;
 
@@ -57,6 +58,23 @@ public class PlayerController : MonoBehaviour
         m_audioSource = GetComponent<AudioSource>();
         m_spriteRenderer = GetComponentInChildren<SpriteRenderer>();
         m_animator = GetComponent<Animator>();
+
+        m_input = new PlayerAction();
+    }
+
+    private void OnEnable()
+    {
+        m_input.Enable();
+    }
+
+    private void OnDisable()
+    {
+        m_input.Disable();
+    }
+
+    private void OnDestroy()
+    {
+        m_input.Disable();
     }
 
     void Start()
@@ -66,14 +84,18 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        if (gameInput.GetButtonDown(GameInput.ButtonType.Main) && transform.position.y < maxHeight)
+        if (m_input.PlatformAction.Jump.triggered)
         {
             Flap();
+
+            Debug.Log("Flap");
         }
 
-        if (gameInput.GetButtonDown(GameInput.ButtonType.Sub))
+        if (m_input.PlatformAction.Dash.triggered)
         {
             Dash();
+
+            Debug.Log("Dash");
         }
 
         float offsetAngle = IsDash() ? m_dashAngle : 0;

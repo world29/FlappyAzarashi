@@ -21,15 +21,35 @@ public class GameController : MonoBehaviour
     }
 
     State state;
+    PlayerAction m_input;
 
     public PlayerController azarashi;
     public Text m_readyText;
     public Fade m_fade;
-    public GameInput gameInput;
     public CheckPoint m_checkPoint;
     public PlayableDirector m_respawnTimeline;
     public PlayableDirector m_deathTimeline;
     public PlayableDirector m_gameoverTimeline;
+
+    private void Awake()
+    {
+        m_input = new PlayerAction();
+    }
+
+    private void OnEnable()
+    {
+        m_input.Enable();
+    }
+
+    private void OnDisable()
+    {
+        m_input.Disable();
+    }
+
+    private void OnDestroy()
+    {
+        m_input.Disable();
+    }
 
     void Start()
     {
@@ -52,7 +72,7 @@ public class GameController : MonoBehaviour
             case State.Title:
                 break;
             case State.Gameplay_Ready:
-                if (gameInput.GetButtonDown(GameInput.ButtonType.Main)) GameStart();
+                if (m_input.PlatformAction.Jump.triggered) GameStart();
                 break;
             case State.Gameplay_Play:
                 if (azarashi.IsDead()) Death();
@@ -62,7 +82,7 @@ public class GameController : MonoBehaviour
             case State.Gameplay_GameOver:
                 break;
             case State.GameClear:
-                if (gameInput.GetButtonDown(GameInput.ButtonType.Main)) Reload();
+                if (m_input.PlatformAction.Jump.triggered) Reload();
                 break;
             default:
                 break;
