@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7677483088706411722}
   - component: {fileID: 2825173834557520253}
-  - component: {fileID: 6919965073498401557}
+  - component: {fileID: 3320126908844397589}
   m_Layer: 10
   m_Name: InfiniteGround
   m_TagString: Untagged
@@ -82,8 +82,8 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!61 &6919965073498401557
-BoxCollider2D:
+--- !u!60 &3320126908844397589
+PolygonCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -97,7 +97,7 @@ BoxCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
+    border: {x: 0, y: 0, z: 0, w: 1.390625}
     pivot: {x: 0.5, y: 0.5}
     oldSize: {x: 4, y: 3.5}
     newSize: {x: 45.56, y: 3.5}
@@ -105,6 +105,9 @@ BoxCollider2D:
     drawMode: 2
     adaptiveTiling: 1
   m_AutoTiling: 1
-  serializedVersion: 2
-  m_Size: {x: 4, y: 3.5}
-  m_EdgeRadius: 0
+  m_Points:
+    m_Paths:
+    - - {x: -2, y: -1.75}
+      - {x: -2, y: 0.296875}
+      - {x: 2, y: 0.28125}
+      - {x: 2, y: -1.75}
