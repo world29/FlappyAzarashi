@@ -2572,12 +2572,12 @@ PrefabInstance:
     - target: {fileID: 6740076514582312662, guid: 9fd84c6d7e3404907b85a18ece6c6362,
         type: 3}
       propertyPath: m_parallax
-      value: 0.05
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 6740076514582312662, guid: 9fd84c6d7e3404907b85a18ece6c6362,
         type: 3}
       propertyPath: m_scrollSpeed
-      value: 0.95
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7986635344826086891, guid: 9fd84c6d7e3404907b85a18ece6c6362,
         type: 3}
@@ -3355,6 +3355,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5943870330602098747, guid: 24dc5a8251fcd4f99ad0f46dacd2b1bc,
+        type: 3}
+      propertyPath: m_parallax
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5943870330602098747, guid: 24dc5a8251fcd4f99ad0f46dacd2b1bc,
+        type: 3}
+      propertyPath: m_scrollSpeed
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 9014740307785085991, guid: 24dc5a8251fcd4f99ad0f46dacd2b1bc,
         type: 3}
       propertyPath: m_enemies.Array.size
@@ -3654,12 +3664,12 @@ PrefabInstance:
     - target: {fileID: 5648788332146746095, guid: b1d2f6f43748146d2963d0e01e7d02e8,
         type: 3}
       propertyPath: m_parallax
-      value: 0.08
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5648788332146746095, guid: b1d2f6f43748146d2963d0e01e7d02e8,
         type: 3}
       propertyPath: m_scrollSpeed
-      value: 0.92
+      value: 1.1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b1d2f6f43748146d2963d0e01e7d02e8, type: 3}
@@ -5105,6 +5115,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2506789658919759731, guid: 306480c4f02b04a4faa869f8cbf3a0b1,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -47.69995
+      objectReference: {fileID: 0}
     - target: {fileID: 3375051665478785642, guid: 306480c4f02b04a4faa869f8cbf3a0b1,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
