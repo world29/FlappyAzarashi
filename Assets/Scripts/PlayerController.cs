@@ -37,6 +37,7 @@ public class PlayerController : MonoBehaviour
     public Color m_dashTrailColor = Color.red;
 
     public GameObject sprite;
+    public AudioClip m_jumpSound;
     public AudioClip m_dashSound;
     public AudioClip m_breakSound;
     public ParticleSystem m_breakParticle;
@@ -123,6 +124,8 @@ public class PlayerController : MonoBehaviour
     IEnumerator FlapCoroutine()
     {
         rb2d.velocity = new Vector2(m_speed, flapVelocity);
+
+        m_audioSource.PlayOneShot(m_jumpSound);
 
         const float trailTime = 0.3f;
 
