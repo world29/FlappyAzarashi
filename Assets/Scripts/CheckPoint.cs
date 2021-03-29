@@ -11,6 +11,7 @@ public class CheckPoint : MonoBehaviour
     AudioSource m_audioSource;
     GameController m_gameController;
     bool m_saved = false;
+    int m_savedScore = 0;
 
     Dictionary<GameObject, Vector3> m_propsPosition = new Dictionary<GameObject, Vector3>();
     Dictionary<Vector3, GameObject> m_enemyPrefabAndPosition = new Dictionary<Vector3, GameObject>();
@@ -58,6 +59,16 @@ public class CheckPoint : MonoBehaviour
 
             obj.transform.position = pos;
         }
+    }
+
+    public void SaveScore()
+    {
+        m_savedScore = GameDataAccessor.Score;
+    }
+
+    public void RestoreScore()
+    {
+        GameDataAccessor.Score = m_savedScore;
     }
 
     public void DestroyEnemies()
