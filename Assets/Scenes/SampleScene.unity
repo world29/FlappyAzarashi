@@ -1140,6 +1140,8 @@ MonoBehaviour:
   m_target: {fileID: 498502622}
   m_offsetX: 0
   m_speed: 50
+  m_smoothTime: 0.3
+  m_maxSpeed: 50
 --- !u!1001 &521445762
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2708,18 +2710,6 @@ PlayableDirector:
   m_ExposedReferences:
     m_References:
     - 6366a458fab541b479b7e7be2bebfc12: {fileID: 1546249649}
---- !u!114 &1342435675 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 9200490297122468775, guid: 306480c4f02b04a4faa869f8cbf3a0b1,
-    type: 3}
-  m_PrefabInstance: {fileID: 9200490296317199100}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &1348879232
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3856,7 +3846,6 @@ MonoBehaviour:
   azarashi: {fileID: 1205948347}
   m_readyText: {fileID: 1647284099}
   m_fade: {fileID: 409992129}
-  gameInput: {fileID: 1194756035}
   m_checkPoint: {fileID: 824441104}
   m_respawnTimeline: {fileID: 1925442906}
   m_deathTimeline: {fileID: 1989796775}
@@ -4882,7 +4871,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_shotButtonText
       value: 
-      objectReference: {fileID: 1342435675}
+      objectReference: {fileID: 0}
     - target: {fileID: 8353916026117952764, guid: 03100ff39ebb1d44e990af408abd5e25,
         type: 3}
       propertyPath: m_Enabled
