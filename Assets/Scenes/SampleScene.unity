@@ -1139,7 +1139,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_target: {fileID: 498502622}
   m_offsetX: 0
-  m_speed: 50
   m_smoothTime: 0.3
   m_maxSpeed: 50
 --- !u!1001 &521445762
@@ -3604,7 +3603,7 @@ PrefabInstance:
     - target: {fileID: 5648788332146746093, guid: b1d2f6f43748146d2963d0e01e7d02e8,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 3.9
+      value: 3.66
       objectReference: {fileID: 0}
     - target: {fileID: 5648788332146746093, guid: b1d2f6f43748146d2963d0e01e7d02e8,
         type: 3}
@@ -5107,7 +5106,7 @@ PrefabInstance:
     - target: {fileID: 2506789658919759731, guid: 306480c4f02b04a4faa869f8cbf3a0b1,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -47.69995
+      value: -47.700195
       objectReference: {fileID: 0}
     - target: {fileID: 3375051665478785642, guid: 306480c4f02b04a4faa869f8cbf3a0b1,
         type: 3}
