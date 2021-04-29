@@ -520,9 +520,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 438578923}
-  - component: {fileID: 438578924}
-  - component: {fileID: 438578925}
   - component: {fileID: 438578926}
+  - component: {fileID: 438578924}
+  - component: {fileID: 438578927}
+  - component: {fileID: 438578925}
   m_Layer: 0
   m_Name: Presenter
   m_TagString: Untagged
@@ -589,17 +590,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 1008144225966918792}
-        m_MethodName: SetActive
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!114 &438578926
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -613,6 +603,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_titleUI: {fileID: 2068773938}
+--- !u!114 &438578927
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 438578922}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a215511f3b70c8e4499a0f54bf61ca80, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_gameplayUI: {fileID: 668585328}
 --- !u!114 &441955180 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 313866486331929469, guid: 306480c4f02b04a4faa869f8cbf3a0b1,
@@ -2495,10 +2498,6 @@ PlayableDirector:
     value: {fileID: 519420033}
   - key: {fileID: 4290709827595444417, guid: ae7edabedcd376f4bb0fdfd1a07bc678, type: 2}
     value: {fileID: 0}
-  - key: {fileID: 852600166483073502, guid: ae7edabedcd376f4bb0fdfd1a07bc678, type: 2}
-    value: {fileID: 0}
-  - key: {fileID: -7976775917734626424, guid: ae7edabedcd376f4bb0fdfd1a07bc678, type: 2}
-    value: {fileID: 668585328}
   m_ExposedReferences:
     m_References:
     - fce521c5661de324bae962c6642c7de7: {fileID: 519420028}
