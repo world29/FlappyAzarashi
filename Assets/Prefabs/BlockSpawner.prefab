@@ -49,6 +49,6 @@ MonoBehaviour:
   m_areaStartX: 10
   m_areaEndX: 100
   m_blockHeightMin: 3.73
-  m_blockHeightMax: 11.34
+  m_blockHeightMax: 10.48
   m_interval: 10
   m_movingBlockRate: 0.5
