@@ -34,6 +34,7 @@ public class MovingBlock : MonoBehaviour
         }
     }
 
+#if UNITY_EDITOR
     private void OnDrawGizmos()
     {
         var from = transform.position;
@@ -45,4 +46,5 @@ public class MovingBlock : MonoBehaviour
         Gizmos.color = Color.red;
         Gizmos.DrawLine(from, to);
     }
+#endif
 }

@@ -13,3 +13,4 @@ MonoBehaviour:
   m_Name: DifficultyLevel_03
   m_EditorClassIdentifier: 
   BlockSpawnInterval: 7
+  MovingBlockSpawnRate: 0.3
