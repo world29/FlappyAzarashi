@@ -4,15 +4,18 @@ using UnityEngine;
 
 public class ClearTrigger : MonoBehaviour
 {
-    GameObject gameController;
+    private PlayerController m_player;
 
     void Start()
     {
-        gameController = GameObject.FindWithTag("GameController");
+        var go = GameObject.FindWithTag("Player");
+        m_player = go.GetComponent<PlayerController>();
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        gameController.SendMessage("IncreaseScore");
+        if (m_player.IsDead()) return;
+
+        GameDataAccessor.Score++;
     }
 }

@@ -8,7 +8,6 @@ public class PlayerController : MonoBehaviour
     float angle;
     bool isDead;
     SpriteTrailRenderer m_trailRenderer;
-    AudioSource m_audioSource;
     GameObject m_gameController;
     SpriteRenderer m_spriteRenderer;
     Animator m_animator;
@@ -37,9 +36,9 @@ public class PlayerController : MonoBehaviour
     public Color m_dashTrailColor = Color.red;
 
     public GameObject sprite;
-    public AudioClip m_jumpSound;
-    public AudioClip m_dashSound;
-    public AudioClip m_breakSound;
+    public string m_jumpSe;
+    public string m_dashSe;
+    public string m_breakSe;
     public ParticleSystem m_breakParticle;
 
     public bool IsDead()
@@ -56,7 +55,6 @@ public class PlayerController : MonoBehaviour
     {
         rb2d = GetComponent<Rigidbody2D>();
         m_trailRenderer = GetComponent<SpriteTrailRenderer>();
-        m_audioSource = GetComponent<AudioSource>();
         m_spriteRenderer = GetComponentInChildren<SpriteRenderer>();
         m_animator = GetComponent<Animator>();
 
@@ -88,15 +86,11 @@ public class PlayerController : MonoBehaviour
         if (m_input.PlatformAction.Jump.triggered)
         {
             Flap();
-
-            Debug.Log("Flap");
         }
 
         if (m_input.PlatformAction.Dash.triggered)
         {
             Dash();
-
-            Debug.Log("Dash");
         }
 
         float offsetAngle = IsDash() ? m_dashAngle : 0;
@@ -125,7 +119,7 @@ public class PlayerController : MonoBehaviour
     {
         rb2d.velocity = new Vector2(m_speed, flapVelocity);
 
-        m_audioSource.PlayOneShot(m_jumpSound);
+        Sound.GetInstance().PlaySe(m_jumpSe);
 
         const float trailTime = 0.3f;
 
@@ -201,9 +195,9 @@ public class PlayerController : MonoBehaviour
         m_trailRenderer.m_TrailTime = 0.5f;
         m_trailRenderer.SetEnabled(true);
 
-        m_animator.SetTrigger("dash");
+        Sound.GetInstance().PlaySe(m_dashSe);
 
-        m_audioSource.PlayOneShot(m_dashSound);
+        m_animator.SetTrigger("dash");
     }
 
     void OnEndDash(bool canceled)
@@ -270,11 +264,22 @@ public class PlayerController : MonoBehaviour
     {
         if (isDead) return;
 
-        Camera.main.SendMessage("Clash");
+        // ライフを減らす
+        int lifeCount = GameDataAccessor.PlayerLifeCount;
 
+        GameDataAccessor.PlayerLifeCount = Mathf.Max(0, lifeCount - 1);
+
+        // 割れる演出を再生
         StartCoroutine(PlayerBreakCoroutine(collision));
 
+        OnDead();
+
         isDead = true;
+    }
+
+    private void OnDead()
+    {
+        Camera.main.SendMessage("Clash");
     }
 
     IEnumerator PlayerBreakCoroutine(Collision2D collision)
@@ -284,9 +289,7 @@ public class PlayerController : MonoBehaviour
 
         GameObject.Instantiate(m_breakParticle, transform.position, transform.rotation);
 
-        //AudioSource.PlayClipAtPoint(m_breakSound, transform.position);
-        m_audioSource.clip = m_breakSound;
-        m_audioSource.Play();
+        Sound.GetInstance().PlaySe(m_breakSe);
 
         m_spriteRenderer.color = new Color(0, 0, 0, 0);
         m_animator.enabled = false;
@@ -297,7 +300,7 @@ public class PlayerController : MonoBehaviour
         }
         GetComponent<Rigidbody2D>().simulated = false;
 
-        yield return new WaitForSecondsRealtime(m_breakSound.length);
+        yield return null;
 
         //gameObject.SetActive(false);
     }

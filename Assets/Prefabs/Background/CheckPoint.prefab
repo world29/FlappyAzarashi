@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 6965312488260017323}
   - component: {fileID: 6965312488260017322}
   - component: {fileID: 6965312488260017320}
-  - component: {fileID: 7102542332736428947}
   - component: {fileID: 8805691942297660066}
   m_Layer: 19
   m_Name: CheckPoint
@@ -73,19 +72,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_sound: {fileID: 8300000, guid: 3ca6ffe47285b054f903b0e86ce3d42c, type: 3}
---- !u!114 &7102542332736428947
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6965312488260017317}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fb1908dfd11e98a44a096b6103c14fe7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_color: {r: 1, g: 0.8057231, b: 0, a: 0.5372549}
+  m_enemies: []
 --- !u!82 &8805691942297660066
 AudioSource:
   m_ObjectHideFlags: 0

@@ -1,0 +1,97 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
+  m_Name: Default Local Group
+  m_EditorClassIdentifier: 
+  m_GroupName: Default Local Group
+  m_Data:
+    m_SerializedData: []
+  m_GUID: 8bbaa0d869844364cb174a0a9ede692e
+  m_SerializeEntries:
+  - m_GUID: 2907ef9f06106403996c00fbd0238a69
+    m_Address: Stage01
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    m_MainAsset: {fileID: 8300000, guid: 2907ef9f06106403996c00fbd0238a69, type: 3}
+    m_TargetAsset: {fileID: 8300000, guid: 2907ef9f06106403996c00fbd0238a69, type: 3}
+  - m_GUID: 9d0dd637930be46cbba6fde7078d4cbc
+    m_Address: AudioMixer
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    m_MainAsset: {fileID: 24100000, guid: 9d0dd637930be46cbba6fde7078d4cbc, type: 2}
+    m_TargetAsset: {fileID: 24100000, guid: 9d0dd637930be46cbba6fde7078d4cbc, type: 2}
+  - m_GUID: c00c227581eceef4abd43e5f6d31a0ca
+    m_Address: break_1
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    m_MainAsset: {fileID: 8300000, guid: c00c227581eceef4abd43e5f6d31a0ca, type: 3}
+    m_TargetAsset: {fileID: 8300000, guid: c00c227581eceef4abd43e5f6d31a0ca, type: 3}
+  - m_GUID: a34701fc837077d44bb8b9a54c264282
+    m_Address: break_2
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    m_MainAsset: {fileID: 8300000, guid: a34701fc837077d44bb8b9a54c264282, type: 3}
+    m_TargetAsset: {fileID: 8300000, guid: a34701fc837077d44bb8b9a54c264282, type: 3}
+  - m_GUID: f0a576aa0f911d5478f4ffc78f096785
+    m_Address: break_3
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    m_MainAsset: {fileID: 8300000, guid: f0a576aa0f911d5478f4ffc78f096785, type: 3}
+    m_TargetAsset: {fileID: 8300000, guid: f0a576aa0f911d5478f4ffc78f096785, type: 3}
+  - m_GUID: 07a02670a25dabd4c870b095805273a5
+    m_Address: wind_1
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    m_MainAsset: {fileID: 8300000, guid: 07a02670a25dabd4c870b095805273a5, type: 3}
+    m_TargetAsset: {fileID: 8300000, guid: 07a02670a25dabd4c870b095805273a5, type: 3}
+  - m_GUID: 3004892ecd2a26b4e8d37f1b4d2f167d
+    m_Address: wind_2
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    m_MainAsset: {fileID: 8300000, guid: 3004892ecd2a26b4e8d37f1b4d2f167d, type: 3}
+    m_TargetAsset: {fileID: 8300000, guid: 3004892ecd2a26b4e8d37f1b4d2f167d, type: 3}
+  - m_GUID: 0a87c4f87e6d45047b5aa9bbe33bce1a
+    m_Address: bell_1
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    m_MainAsset: {fileID: 8300000, guid: 0a87c4f87e6d45047b5aa9bbe33bce1a, type: 3}
+    m_TargetAsset: {fileID: 8300000, guid: 0a87c4f87e6d45047b5aa9bbe33bce1a, type: 3}
+  - m_GUID: 659f1f9b508026f489dff345f22259d8
+    m_Address: falldown
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    m_MainAsset: {fileID: 8300000, guid: 659f1f9b508026f489dff345f22259d8, type: 3}
+    m_TargetAsset: {fileID: 8300000, guid: 659f1f9b508026f489dff345f22259d8, type: 3}
+  - m_GUID: 1cfa8d974b7734d4cb105c94128d2a9b
+    m_Address: bell_2
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    m_MainAsset: {fileID: 8300000, guid: 1cfa8d974b7734d4cb105c94128d2a9b, type: 3}
+    m_TargetAsset: {fileID: 8300000, guid: 1cfa8d974b7734d4cb105c94128d2a9b, type: 3}
+  - m_GUID: 69d6833d9d32b2d40ba972e697af118c
+    m_Address: dash_1
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    m_MainAsset: {fileID: 8300000, guid: 69d6833d9d32b2d40ba972e697af118c, type: 3}
+    m_TargetAsset: {fileID: 8300000, guid: 69d6833d9d32b2d40ba972e697af118c, type: 3}
+  - m_GUID: 9a006ce113fb9094385b0631c29c5a7a
+    m_Address: hurt_1
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    m_MainAsset: {fileID: 8300000, guid: 9a006ce113fb9094385b0631c29c5a7a, type: 3}
+    m_TargetAsset: {fileID: 8300000, guid: 9a006ce113fb9094385b0631c29c5a7a, type: 3}
+  m_ReadOnly: 0
+  m_Settings: {fileID: 11400000, guid: 590b539395c4d97428099700637680e3, type: 2}
+  m_SchemaSet:
+    m_Schemas:
+    - {fileID: 11400000, guid: 9812b3558226f994ba7158c67aa0f285, type: 2}
+    - {fileID: 11400000, guid: 3652a6118dec8104995e317bd39fb309, type: 2}

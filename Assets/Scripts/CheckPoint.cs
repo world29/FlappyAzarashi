@@ -31,8 +31,6 @@ public class CheckPoint : MonoBehaviour
 
         m_audioSource.PlayOneShot(m_sound);
 
-        m_gameController.SetRespawnPoint(this);
-
         SpawnEnemies();
     }
 

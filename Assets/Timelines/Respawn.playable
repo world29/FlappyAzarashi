@@ -225,7 +225,6 @@ MonoBehaviour:
   m_Tracks:
   - {fileID: 656547715982379991}
   - {fileID: 5496488331519163249}
-  - {fileID: 2198814582474248064}
   - {fileID: 852600166483073502}
   - {fileID: -7976775917734626424}
   m_FixedDuration: 0

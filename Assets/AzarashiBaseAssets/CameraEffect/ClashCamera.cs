@@ -5,8 +5,13 @@ public class ClashCamera : MonoBehaviour
 {
     public void Clash()
     {
-        FlashEffect.Play();
+        Flash();
         Shake();
+    }
+
+    public void Flash()
+    {
+        FlashEffect.Play();
     }
 
     public void Shake()
