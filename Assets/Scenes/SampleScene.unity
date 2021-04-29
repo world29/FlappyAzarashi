@@ -699,6 +699,8 @@ PlayableDirector:
     value: {fileID: 498502623}
   - key: {fileID: -7031919625866306558, guid: aa280a81157bf6949a60eec53dfe24f8, type: 2}
     value: {fileID: 2068773938}
+  - key: {fileID: 2627284493288970624, guid: aa280a81157bf6949a60eec53dfe24f8, type: 2}
+    value: {fileID: 0}
   m_ExposedReferences:
     m_References: []
 --- !u!1 &519420028
@@ -826,7 +828,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 519420028}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f857c2cdadc8544448134cb93f1c06dc, type: 3}
   m_Name: 
@@ -1532,6 +1534,7 @@ GameObject:
   - component: {fileID: 1279087011}
   - component: {fileID: 1279087012}
   - component: {fileID: 1279087013}
+  - component: {fileID: 1279087014}
   m_Layer: 0
   m_Name: GameplayScene
   m_TagString: Untagged
@@ -1588,6 +1591,25 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_playerLifeCount: 3
   m_initialStageId: 0
+--- !u!114 &1279087014
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1279087010}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 59de8e33ccffe9d4f903d75e7c8b3b89, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_difficultyLevels:
+  - {fileID: 11400000, guid: 6381f25cda99d8146879d780e7740062, type: 2}
+  - {fileID: 11400000, guid: 539684b38d8956442aa3823eda26051e, type: 2}
+  - {fileID: 11400000, guid: 290d50fd2889df345b0799c07abd50bf, type: 2}
+  - {fileID: 11400000, guid: 089bd4b0a058d0644b19bfd75b9d09a9, type: 2}
+  - {fileID: 11400000, guid: 769334211c93ff247978b4c3bf6062c8, type: 2}
+  m_initialLevelIndex: 0
 --- !u!1001 &1323233008
 PrefabInstance:
   m_ObjectHideFlags: 0

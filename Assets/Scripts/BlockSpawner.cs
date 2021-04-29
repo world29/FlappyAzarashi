@@ -2,7 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BlockSpawner : MonoBehaviour, IStageEvents, IGameStateEventHandler
+public class BlockSpawner
+    : MonoBehaviour
+    , IStageEvents
+    , IGameStateEventHandler
+    , IDifficultyEvents
 {
     public GameObject m_block;
 
@@ -57,6 +61,7 @@ public class BlockSpawner : MonoBehaviour, IStageEvents, IGameStateEventHandler
     {
         BroadcastReceivers.RegisterBroadcastReceiver<IStageEvents>(gameObject);
         BroadcastReceivers.RegisterBroadcastReceiver<IGameStateEventHandler>(gameObject);
+        BroadcastReceivers.RegisterBroadcastReceiver<IDifficultyEvents>(gameObject);
 
         GameDataAccessor.OnStageChanged.AddListener(OnStageChanged);
     }
@@ -65,6 +70,7 @@ public class BlockSpawner : MonoBehaviour, IStageEvents, IGameStateEventHandler
     {
         GameDataAccessor.OnStageChanged.RemoveListener(OnStageChanged);
 
+        BroadcastReceivers.UnregisterBroadcastReceiver<IDifficultyEvents>(gameObject);
         BroadcastReceivers.UnregisterBroadcastReceiver<IGameStateEventHandler>(gameObject);
         BroadcastReceivers.UnregisterBroadcastReceiver<IStageEvents>(gameObject);
     }
@@ -120,6 +126,13 @@ public class BlockSpawner : MonoBehaviour, IStageEvents, IGameStateEventHandler
         m_enableSpawning = true;
 
         SpawnBlocksToInitialPosition();
+    }
+
+    public void OnChangeDifficulty(DifficultyLevel difficultyLevel)
+    {
+        m_interval = difficultyLevel.BlockSpawnInterval;
+
+        Debug.LogFormat("[BlockSpawner] Difficulty changed. BlockSpawnInterval={0}", m_interval);
     }
 
     public void OnGameStateChanged(IGameState prevState, IGameState nextState)

@@ -78,6 +78,10 @@ public class WarpPoint : MonoBehaviour
         {
             DoWarp();
 
+            //TODO: 難易度を変更する
+            // ステージ変更イベントによってブロックが生成されるため、難易度の変更はステージ変更よりも前に行う必要がある。
+            DifficultyBehaviour.Instance.NextLevel();
+
             GameDataAccessor.CurrentStageId = (StageId)((int)(GameDataAccessor.CurrentStageId + 1) % (int)StageId.Num);
         }
     }
