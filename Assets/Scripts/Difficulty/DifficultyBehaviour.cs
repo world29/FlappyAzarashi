@@ -34,7 +34,7 @@ public class DifficultyBehaviour : MonoBehaviour
         if (!InitializeAsSingleton()) return;
     }
 
-    private void Start()
+    public void InitializeDifficultyLevel()
     {
         m_levelIndex = m_initialLevelIndex;
 

@@ -18,6 +18,8 @@ public class GameInitializer : MonoBehaviour
 
     void Start()
     {
+        DifficultyBehaviour.Instance.InitializeDifficultyLevel();
+
         InitializeGameData();
 
         m_player.SetSteerActive(false);
