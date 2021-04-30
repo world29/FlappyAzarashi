@@ -6,8 +6,8 @@ using UnityEngine.Events;
 
 public class ResultPresenter : MonoBehaviour, IGameStateEventHandler
 {
-    public Button m_continueButton;
-    public Button m_showAdsButton;
+    public ScoreCounter m_scoreCounter;
+
     public Button m_surrenderButton;
 
     public UnityEvent m_onEnterResultState;
@@ -37,14 +37,7 @@ public class ResultPresenter : MonoBehaviour, IGameStateEventHandler
 
     void OnEnterResultState()
     {
-        if (GameDataAccessor.PlayerLifeCount == 0)
-        {
-            m_showAdsButton.gameObject.SetActive(true);
-        }
-        else
-        {
-            m_continueButton.gameObject.SetActive(true);
-        }
+        m_scoreCounter.gameObject.SetActive(true);
 
         m_surrenderButton.gameObject.SetActive(true);
 
@@ -56,7 +49,7 @@ public class ResultPresenter : MonoBehaviour, IGameStateEventHandler
         m_onExitResultState.Invoke();
 
         m_surrenderButton.gameObject.SetActive(false);
-        m_showAdsButton.gameObject.SetActive(false);
-        m_continueButton.gameObject.SetActive(false);
+
+        m_scoreCounter.gameObject.SetActive(false);
     }
 }

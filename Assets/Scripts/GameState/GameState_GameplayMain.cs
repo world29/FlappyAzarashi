@@ -28,7 +28,7 @@ public class GameState_GameplayMain : IGameState
     {
         if (m_player.IsDead())
         {
-            return new GameState_DemoPlayerDead();
+            return new GameState_GameplayDead();
         }
 
         return this;

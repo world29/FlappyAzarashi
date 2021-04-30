@@ -9,7 +9,5 @@ public class TimelineManager : SingletonMonoBehaviour<TimelineManager>
 
     public PlayableDirector m_timelinePlayerSpawn;
 
-    public PlayableDirector m_timelinePlayerDead;
-
-    public PlayableDirector m_timelinePlayerDeadAndGameOver;
+    public PlayableDirector m_timelinePlayerGameOver;
 }

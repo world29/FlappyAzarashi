@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class GameState_Result : IGameState
+public class GameState_Continue : IGameState
 {
     class GameEventListener : IGameEventListener
     {
@@ -15,30 +15,27 @@ public class GameState_Result : IGameState
         }
     }
 
-    GameEventListener m_surrenderListener;
+    GameEventListener m_continueListener;
 
     public void OnEnter(GameStateMachineContext ctx)
     {
-        m_surrenderListener = new GameEventListener();
+        m_continueListener = new GameEventListener();
 
-        ctx.m_PressSurrenderEvent.RegisterListener(m_surrenderListener);
+        ctx.m_PressContinueEvent.RegisterListener(m_continueListener);
     }
 
     public void OnExit(GameStateMachineContext ctx)
     {
-        ctx.m_PressSurrenderEvent.UnregisterListener(m_surrenderListener);
+        ctx.m_PressContinueEvent.UnregisterListener(m_continueListener);
 
-        m_surrenderListener = null;
+        m_continueListener = null;
     }
 
     public IGameState OnUpdate(GameStateMachineContext ctx)
     {
-        if (m_surrenderListener.Raised)
+        if (m_continueListener.Raised)
         {
-            //todo: 本来はステートマシンの外部でシーン遷移を呼び出す
-            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-
-            return new GameState_Title();
+            return new GameState_DemoPlayerRespawn();
         }
 
         return this;
