@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 1007759177958824713}
   - component: {fileID: 1007759177958824717}
   - component: {fileID: 1007759177958824714}
+  - component: {fileID: 2548088222002959742}
   m_Layer: 5
   m_Name: JumpButton
   m_TagString: Untagged
@@ -191,6 +192,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 89679a21b210aa844856e9b97d3f032a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &2548088222002959742
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1007759177958824759}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6d54531977ecb194c95e2d3aa7a5d72a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_ControlPath: <Gamepad>/buttonWest
 --- !u!1 &1007759178242708569
 GameObject:
   m_ObjectHideFlags: 0
@@ -253,6 +267,7 @@ GameObject:
   - component: {fileID: 1007759178453736073}
   - component: {fileID: 1007759178453736077}
   - component: {fileID: 1007759178453736074}
+  - component: {fileID: 7376415653292184168}
   m_Layer: 5
   m_Name: DashButton
   m_TagString: Untagged
@@ -430,6 +445,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 89679a21b210aa844856e9b97d3f032a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &7376415653292184168
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1007759178453736119}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6d54531977ecb194c95e2d3aa7a5d72a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_ControlPath: <Gamepad>/buttonSouth
 --- !u!1 &1363355245302378313
 GameObject:
   m_ObjectHideFlags: 0
@@ -985,7 +1013,7 @@ PrefabInstance:
     - target: {fileID: 4757267950018601289, guid: 20d34ce8d761440b2815adb9b1bb9645,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -47.7
+      value: -47.69995
       objectReference: {fileID: 0}
     - target: {fileID: 4757267950018601289, guid: 20d34ce8d761440b2815adb9b1bb9645,
         type: 3}
