@@ -1550,6 +1550,7 @@ GameObject:
   - component: {fileID: 1279087012}
   - component: {fileID: 1279087013}
   - component: {fileID: 1279087014}
+  - component: {fileID: 1279087015}
   m_Layer: 0
   m_Name: GameplayScene
   m_TagString: Untagged
@@ -1627,6 +1628,18 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 37f536a27b528c14da08673b4a515fcd, type: 2}
   - {fileID: 11400000, guid: bd6d4c0a38b8cac4e86241b0e8f8ac35, type: 2}
   m_initialLevelIndex: 0
+--- !u!114 &1279087015
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1279087010}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 51bbb5e5bac46484a98eabc2f263726b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1323233008
 PrefabInstance:
   m_ObjectHideFlags: 0
