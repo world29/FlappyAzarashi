@@ -1716,7 +1716,7 @@ PrefabInstance:
     - target: {fileID: 6740076514582312662, guid: 9fd84c6d7e3404907b85a18ece6c6362,
         type: 3}
       propertyPath: m_parallax
-      value: 0.1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6740076514582312662, guid: 9fd84c6d7e3404907b85a18ece6c6362,
         type: 3}
@@ -2176,7 +2176,7 @@ PrefabInstance:
     - target: {fileID: 5648788332146746095, guid: b1d2f6f43748146d2963d0e01e7d02e8,
         type: 3}
       propertyPath: m_scrollSpeed
-      value: 1.1
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b1d2f6f43748146d2963d0e01e7d02e8, type: 3}
