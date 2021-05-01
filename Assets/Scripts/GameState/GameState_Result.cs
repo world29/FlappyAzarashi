@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.Advertisements;
 
 public class GameState_Result : IGameState
 {
@@ -16,6 +17,8 @@ public class GameState_Result : IGameState
     }
 
     GameEventListener m_surrenderListener;
+
+    private bool m_isAdvertisementCompleted = false;
 
     public void OnEnter(GameStateMachineContext ctx)
     {
@@ -33,14 +36,41 @@ public class GameState_Result : IGameState
 
     public IGameState OnUpdate(GameStateMachineContext ctx)
     {
-        if (m_surrenderListener.Raised)
+        if (m_isAdvertisementCompleted)
         {
-            //todo: 本来はステートマシンの外部でシーン遷移を呼び出す
-            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-
             return new GameState_Title();
         }
 
+        if (m_surrenderListener.Raised)
+        {
+            if (!Advertisement.IsReady())
+            {
+                ReloadScene();
+
+                return new GameState_Title();
+            }
+
+            var options = new ShowOptions
+            {
+                resultCallback = OnAdvertisementCompleted
+            };
+
+            Advertisement.Show(options);
+        }
+
         return this;
+    }
+
+    public void OnAdvertisementCompleted(ShowResult result)
+    {
+        ReloadScene();
+
+        m_isAdvertisementCompleted = true;
+    }
+
+    private void ReloadScene()
+    {
+        //todo: 本来はステートマシンの外部でシーン遷移を呼び出す
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 }
