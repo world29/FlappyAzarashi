@@ -10,6 +10,16 @@ public class DifficultyBehaviour : MonoBehaviour
 
     private int m_levelIndex = 0;
 
+    public DifficultyLevel CurrentLevel
+    {
+        get { return m_difficultyLevels[m_levelIndex]; }
+    }
+
+    public int CurrentLevelIndex
+    {
+        get { return m_levelIndex; }
+    }
+
     // singleton
     public static DifficultyBehaviour Instance { get; private set; }
     bool InitializeAsSingleton()
