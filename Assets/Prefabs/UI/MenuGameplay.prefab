@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 1007759177958824712}
   - component: {fileID: 1007759177958824713}
   - component: {fileID: 2548088222002959742}
+  - component: {fileID: 2305325219116823156}
   m_Layer: 5
   m_Name: JumpButton
   m_TagString: Untagged
@@ -133,6 +134,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_ControlPath: <Gamepad>/buttonWest
+--- !u!114 &2305325219116823156
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1007759177958824759}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e6c645b91ecfc47a79055a1431ef778b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_actionName: Jump
+  m_scaleEndValue: 0.8
+  m_duration: 0.25
 --- !u!1 &1007759178242708569
 GameObject:
   m_ObjectHideFlags: 0
@@ -195,6 +211,7 @@ GameObject:
   - component: {fileID: 1007759178453736072}
   - component: {fileID: 1007759178453736073}
   - component: {fileID: 7376415653292184168}
+  - component: {fileID: 8567638491018550635}
   m_Layer: 5
   m_Name: DashButton
   m_TagString: Untagged
@@ -315,6 +332,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_ControlPath: <Gamepad>/buttonSouth
+--- !u!114 &8567638491018550635
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1007759178453736119}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e6c645b91ecfc47a79055a1431ef778b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_actionName: Dash
+  m_scaleEndValue: 0.8
+  m_duration: 0.25
 --- !u!1 &1363355245302378313
 GameObject:
   m_ObjectHideFlags: 0
@@ -923,11 +955,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_textAlignment
       value: 65535
-      objectReference: {fileID: 0}
-    - target: {fileID: 4365665699343594652, guid: 875a5429ae8820746b0dc6fd0263ea62,
-        type: 3}
-      propertyPath: m_TextStyleHashCode
-      value: -1183493901
       objectReference: {fileID: 0}
     - target: {fileID: 5467887428193859174, guid: 875a5429ae8820746b0dc6fd0263ea62,
         type: 3}
