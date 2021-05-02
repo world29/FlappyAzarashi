@@ -28,7 +28,6 @@ public class PlayerController : MonoBehaviour
 
     public GameObject dashAttackCollision;
     public GameObject damageCollision;
-    public GameObject projectileReflectCollision;
     public float m_hitStopTime = 0.1f;
     public bool m_dashHitCameraShake = false;
     public bool m_jumpTrail = false;
@@ -189,7 +188,6 @@ public class PlayerController : MonoBehaviour
 
         dashAttackCollision.SetActive(true);
         damageCollision.SetActive(false);
-        projectileReflectCollision.SetActive(true);
 
         ChangeTrailColor(m_dashTrailColor);
         m_trailRenderer.m_TrailTime = 0.5f;
@@ -206,7 +204,6 @@ public class PlayerController : MonoBehaviour
         {
             m_trailRenderer.SetEnabled(false);
         }
-        projectileReflectCollision.SetActive(false);
         damageCollision.SetActive(true);
         dashAttackCollision.SetActive(false);
 

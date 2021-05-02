@@ -26,7 +26,7 @@ TagManager:
   - PlayerObstacle
   - EnemyPiece
   - PlayerItem
-  - PlayerProjectileReflect
+  - PlayerProjectileDamage
   - PlayerShot
   - CheckPoint
   - EnemyDetection
