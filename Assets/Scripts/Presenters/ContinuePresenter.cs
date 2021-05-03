@@ -34,7 +34,9 @@ public class ContinuePresenter : MonoBehaviour, IGameStateEventHandler
 
     void OnEnterContinueState()
     {
-        m_coroutine = StartCoroutine(FadeInContinueUI());
+        m_continueUI.SetActive(true);
+
+        m_continueUI.GetComponent<ContinueSequence>().Animate();
     }
 
     void OnExitContinueState()
