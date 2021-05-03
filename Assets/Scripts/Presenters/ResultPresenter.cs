@@ -6,9 +6,7 @@ using UnityEngine.Events;
 
 public class ResultPresenter : MonoBehaviour, IGameStateEventHandler
 {
-    public ScoreCounter m_scoreCounter;
-
-    public Button m_surrenderButton;
+    public GameObject m_resultUI;
 
     public UnityEvent m_onEnterResultState;
     public UnityEvent m_onExitResultState;
@@ -37,9 +35,9 @@ public class ResultPresenter : MonoBehaviour, IGameStateEventHandler
 
     void OnEnterResultState()
     {
-        m_scoreCounter.gameObject.SetActive(true);
+        m_resultUI.SetActive(true);
 
-        m_surrenderButton.gameObject.SetActive(true);
+        m_resultUI.GetComponent<ResultSequence>().Animate();
 
         m_onEnterResultState.Invoke();
     }
@@ -48,8 +46,6 @@ public class ResultPresenter : MonoBehaviour, IGameStateEventHandler
     {
         m_onExitResultState.Invoke();
 
-        m_surrenderButton.gameObject.SetActive(false);
-
-        m_scoreCounter.gameObject.SetActive(false);
+        m_resultUI.SetActive(false);
     }
 }
