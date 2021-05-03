@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class ReadyPresenter : MonoBehaviour, IGameStateEventHandler
 {
-    public Text m_readyText;
+    public GameObject m_readyUI;
 
     private void OnEnable()
     {
@@ -31,11 +31,11 @@ public class ReadyPresenter : MonoBehaviour, IGameStateEventHandler
 
     void OnEnterReadyState()
     {
-        m_readyText.gameObject.SetActive(true);
+        m_readyUI.SetActive(true);
     }
 
     void OnExitReadyState()
     {
-        m_readyText.gameObject.SetActive(false);
+        m_readyUI.SetActive(false);
     }
 }
