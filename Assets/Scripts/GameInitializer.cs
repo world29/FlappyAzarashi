@@ -8,13 +8,7 @@ public class GameInitializer : MonoBehaviour
 
     public StageId m_initialStageId = StageId.Stage1;
 
-    private PlayerController m_player;
-
-    private void Awake()
-    {
-        var go = GameObject.FindWithTag("Player");
-        m_player = go.GetComponent<PlayerController>();
-    }
+    public bool m_resetHighScore = false;
 
     void Start()
     {
@@ -22,14 +16,26 @@ public class GameInitializer : MonoBehaviour
 
         InitializeGameData();
 
-        m_player.SetSteerActive(false);
-
         StartCoroutine(InitializeCotoutine());
     }
 
     void InitializeGameData()
     {
-        GameDataAccessor.Initialize(m_playerLifeCount, m_initialStageId);
+        int highScore = 0;
+
+        var saveData = SaveLoadGame.LoadGame();
+
+        if (saveData != null)
+        {
+            highScore = saveData.HighScore;
+        }
+
+        if (m_resetHighScore)
+        {
+            highScore = 0;
+        }
+
+        GameDataAccessor.Initialize(m_playerLifeCount, highScore, m_initialStageId);
     }
 
     IEnumerator InitializeCotoutine()

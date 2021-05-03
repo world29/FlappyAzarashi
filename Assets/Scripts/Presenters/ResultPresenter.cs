@@ -37,7 +37,23 @@ public class ResultPresenter : MonoBehaviour, IGameStateEventHandler
     {
         m_resultUI.SetActive(true);
 
-        m_resultUI.GetComponent<ResultSequence>().Animate();
+        bool hasNewRecord = false;
+
+        // save high score
+        var score = GameDataAccessor.Score;
+        if (score > GameDataAccessor.HighScore)
+        {
+            GameDataAccessor.HighScore = score;
+
+            hasNewRecord = true;
+
+            SaveLoadGame.SaveGame();
+        }
+
+        var resultSequencer = m_resultUI.GetComponent<ResultSequence>();
+
+        resultSequencer.m_hasNewRecord = hasNewRecord;
+        resultSequencer.Animate();
 
         m_onEnterResultState.Invoke();
     }

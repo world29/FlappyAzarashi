@@ -18,6 +18,8 @@ public class GameData
 
     public int Score;
 
+    public int HighScore;
+
     public StageId CurrentStageId;
 }
 
@@ -51,6 +53,18 @@ public static class GameDataAccessor
 
     public static UnityEventInt OnScoreChanged = new UnityEventInt();
 
+    public static int HighScore
+    {
+        get { return s_gameData.HighScore; }
+        set
+        {
+            s_gameData.HighScore = value;
+            OnHighScoreChanged.Invoke(value);
+        }
+    }
+
+    public static UnityEventInt OnHighScoreChanged = new UnityEventInt();
+
     public static StageId CurrentStageId
     {
         get { return s_gameData.CurrentStageId; }
@@ -65,13 +79,14 @@ public static class GameDataAccessor
 
     public static void Initialize()
     {
-        Initialize(InitialPlayerLifeCount, StageId.Stage1);
+        Initialize(InitialPlayerLifeCount, 0, StageId.Stage1);
     }
 
-    public static void Initialize(int playerLifeCount, StageId initialStageId)
+    public static void Initialize(int playerLifeCount, int highScore, StageId initialStageId)
     {
         PlayerLifeCount = playerLifeCount;
         Score = 0;
+        HighScore = highScore;
         CurrentStageId = initialStageId;
     }
 
