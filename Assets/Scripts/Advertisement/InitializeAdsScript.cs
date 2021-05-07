@@ -5,14 +5,16 @@ using UnityEngine.Advertisements;
 
 public class InitializeAdsScript : MonoBehaviour
 {
-    static readonly string kGameID_iOS = "4112076";
-    static readonly string kGameID_Android = "4112077";
+#if UNITY_IOS
+    static readonly string kGameID = "4112076";
+#elif UNITY_ANDROID
+    static readonly string kGameID = "4112077";
+#endif
 
-    string gameId = kGameID_iOS;
-    bool testMode = true;
+    public bool testMode;
 
     void Start()
     {
-        Advertisement.Initialize(gameId, testMode);
+        Advertisement.Initialize(kGameID, testMode);
     }
 }

@@ -98,7 +98,7 @@ LightmapSettings:
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 1
+  m_UseShadowmask: 0
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -1347,6 +1347,7 @@ GameObject:
   - component: {fileID: 847252321}
   - component: {fileID: 847252320}
   - component: {fileID: 847252319}
+  - component: {fileID: 847252322}
   m_Layer: 0
   m_Name: GameInitializer
   m_TagString: Untagged
@@ -1366,6 +1367,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 51bbb5e5bac46484a98eabc2f263726b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  testMode: 0
 --- !u!114 &847252320
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1395,6 +1397,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &847252322
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 847252318}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 575c0a2ca9a3a4d8793a16bc25a66668, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &865724040 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2232098862756500244, guid: 7d2a4864e205e48e18968e12f15553d5,

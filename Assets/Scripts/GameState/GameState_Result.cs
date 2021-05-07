@@ -4,6 +4,10 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.Advertisements;
 
+#if UNITY_IOS
+using Unity.Advertisement.IosSupport;
+#endif
+
 public class GameState_Result : IGameState
 {
     class GameEventListener : IGameEventListener
@@ -19,6 +23,8 @@ public class GameState_Result : IGameState
     GameEventListener m_surrenderListener;
 
     private bool m_isAdvertisementCompleted = false;
+
+    private bool m_isShowingAds = false;
 
     public void OnEnter(GameStateMachineContext ctx)
     {
@@ -38,6 +44,8 @@ public class GameState_Result : IGameState
     {
         if (m_isAdvertisementCompleted)
         {
+            ReloadScene();
+
             return new GameState_Title();
         }
 
@@ -50,21 +58,49 @@ public class GameState_Result : IGameState
                 return new GameState_Title();
             }
 
-            var options = new ShowOptions
-            {
-                resultCallback = OnAdvertisementCompleted
-            };
-
-            Advertisement.Show(options);
+            ShowAds();
         }
 
         return this;
     }
 
+    private void ShowAds()
+    {
+#if UNITY_IOS
+        if (m_isShowingAds) return;
+
+        var status = ATTrackingStatusBinding.GetAuthorizationTrackingStatus();
+
+        Debug.LogFormat("ATTrackingAuthrizationStatus={0}", status);
+
+        switch (status)
+        {
+            case ATTrackingStatusBinding.AuthorizationTrackingStatus.RESTRICTED:
+            case ATTrackingStatusBinding.AuthorizationTrackingStatus.DENIED:
+                m_isAdvertisementCompleted = true;
+                break;
+            case ATTrackingStatusBinding.AuthorizationTrackingStatus.AUTHORIZED:
+                ShowAdsImpl();
+                m_isShowingAds = true;
+                break;
+        }
+#else
+        m_isAdvertisementCompleted = true;
+#endif
+    }
+
+    private void ShowAdsImpl()
+    {
+        var options = new ShowOptions
+        {
+            resultCallback = OnAdvertisementCompleted
+        };
+
+        Advertisement.Show(options);
+    }
+
     public void OnAdvertisementCompleted(ShowResult result)
     {
-        ReloadScene();
-
         m_isAdvertisementCompleted = true;
     }
 
