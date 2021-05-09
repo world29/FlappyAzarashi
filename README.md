@@ -3,6 +3,7 @@
 ## 素材
 
 - [効果音辞典](https://sounddictionary.info/)
+- [効果音ラボ](https://soundeffect-lab.info/)
 
 ## 使用ライブラリ
 
